@@ -90,11 +90,12 @@ exports.getAllRegistrations = async (req, res) => {
 
 exports.logoutUser = async (req, res) => {
   try {
+    console.log("hi");
     req.user.tokens = req.user.tokens.filter((currElement) => {
       return currElement.token !== req.token;
     });
 
-    res.clearCookie("jwt");
+    res.clearCookie("token");
     console.log("Logout successfully");
     await req.user.save();
     res.render("index"); // Assuming you want to render some page after logout
