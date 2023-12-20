@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');  // Import the cors middleware
+const jwt = require('jsonwebtoken');
 const connectDB = require('./config/db');
 const assignmentRoutes = require('./routes/assignmentRoutes');
 const userRoutes = require('./routes/userRoutes')
@@ -19,8 +20,7 @@ app.use(bodyParser.json());
 
 app.use(cookieParser());
 
-app.use(cors());
-
+app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 
 // Assign the assignment routes
 app.use('/assignments', assignmentRoutes);

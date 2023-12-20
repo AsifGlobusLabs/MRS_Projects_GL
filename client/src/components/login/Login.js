@@ -9,34 +9,47 @@ const LoginForm = () => {
   const [error, setError] = useState('');
   const navigate = useNavigate();
 
+  
   const handleLogin = async (e) => {
     e.preventDefault();
-
+  
     try {
       setLoading(true);
-      const response = await axios.post('http://localhost:5000/user/login', {
-        employee_id: employeeId,
-        password: password,
-        
-      });
+      const response = await axios.post(
+        'http://localhost:5000/user/login',
+        {
+          employee_id: employeeId,
+          password: password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true,
+        }
+      );
+  
+    const data = await response.data; // Use response.data instead of await response.json()
+    console.log("data", data);
 
-      // Assuming the response.data structure contains the necessary information
-      const isAdmin = response.data.role === 'admin';
-      console.log(response, "hello")
-      if (isAdmin) {
-       
-        navigate('/assignment');
+    if (response.status === 400 || !data) {
+      console.log("not open");
+    } else {
+      console.log("login successful");
+      // Use navigate to navigate based on user role
+      if (data.user.role === "admin") {
+        navigate("/"); // Navigate to the admin route
       } else {
-        navigate('/');
+        navigate("/contact"); // Navigate to the user route
       }
-    } catch (error) {
-      setError('Invalid employee or password');
-      console.error('Login failed', error);
-    } finally {
-      setLoading(false);
     }
-  };
+  } catch (error) {
+    setError('Invalid email or password');
+    console.error(error);
+  }
 
+
+  };
   return (
       <div className="main-container p-0">
        <div className="register-header p-2">
