@@ -7,7 +7,7 @@ import "./App.css";
 // import MainRoutes from "./components/routes/MainRoutes";
 import AuthenticationRoutes from "./components/routes/AuthenticationRoutes";
 import Team from "./components/Team/Team";
-import Home from "./components/Home";
+import Home from "./components/home/Home";
 import Assignment from "./components/assignment/Assignment";
 import Task from "./components/Task";
 // import LoginForm from "./components/login/Login";

@@ -1,12 +1,11 @@
 // controllers/userController.js
-const User = require("../models/userModel");
-const bcrypt = require("bcrypt");
+const User = require('../models/userModel');
+const bcrypt = require('bcrypt');
 
-const jwt = require("jsonwebtoken");
+const jwt = require('jsonwebtoken');
 
-// const JWT_SECRET = process.env.JWT_SECRET || 'your_secret_key';
 
-const SECRET_KEY = "miteshpradhanArkaJainUniversity";
+const SECRET_KEY = 'miteshpradhanArkaJainUniversity';
 
 exports.loginUser = async (req, res) => {
   try {
@@ -14,21 +13,17 @@ exports.loginUser = async (req, res) => {
     const user = await User.findOne({ employee_id });
 
     if (!user || !(await bcrypt.compare(password, user.password))) {
-      return res.status(401).json({ message: "Invalid credentials" });
+      return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    const token = jwt.sign(
-      { employee_id: employee_id, role: user.role },
-      SECRET_KEY,
-      {
-        expiresIn: "1h",
-      },
-    );
+    const token = jwt.sign({ employee_id: employee_id, role: user.role }, SECRET_KEY, {
+      expiresIn: '1h',
+    });
 
-    res.cookie("token", token, { httpOnly: true });
+    res.cookie('token', token, { httpOnly: true });
 
     res.json({
-      message: "Login successful",
+      message: 'Login successful',
       user: {
         user: user._id,
         employee_id: user.employee_id,
@@ -41,9 +36,11 @@ exports.loginUser = async (req, res) => {
     });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Internal server error" });
+    res.status(500).json({ message: 'Internal server error' });
   }
-};
+}
+
+
 
 exports.registerUser = async (req, res) => {
   try {
@@ -51,21 +48,8 @@ exports.registerUser = async (req, res) => {
     const confirm_password = req.body.confirm_password;
 
     if (password === confirm_password) {
-      const registration = new User({
-        first_name: req.body.first_name,
-        last_name: req.body.last_name,
-        address: req.body.address,
-        city: req.body.city,
-        state: req.body.state,
-        phone_number: req.body.phone_number,
-        email: req.body.email,
-        position: req.body.position,
-        employee_id: req.body.employee_id,
-        password: req.body.password,
-        confirm_password: req.body.confirm_password,
-        image: req.file.filename,
-      });
-      console.log(req.file);
+      const registration = new User(req.body);
+
       const token = await registration.generateAuthToken();
       console.log("the token part is " + token);
 
@@ -88,30 +72,44 @@ exports.getAllRegistrations = async (req, res) => {
   }
 };
 
-exports.logoutUser = async (req, res) => {
-  try {
-    console.log("hi");
-    req.user.tokens = req.user.tokens.filter((currElement) => {
-      return currElement.token !== req.token;
-    });
 
-    res.clearCookie("token");
-    console.log("Logout successfully");
-    await req.user.save();
-    res.render("index"); // Assuming you want to render some page after logout
-  } catch (error) {
-    res.status(500).send(error);
-  }
-};
 
 exports.logoutAllDevices = async (req, res) => {
   try {
+    console.log("hi");
+    // Clear user tokens
     req.user.tokens = [];
-    res.clearCookie("jwt");
-    console.log("Logout successfully from all devices");
+    console.log("hi1");
+    // Clear the token cookie
+    res.clearCookie("token");
+    console.log("hi2");
+    // Save the user with the updated tokens
     await req.user.save();
-    res.render("index"); // Assuming you want to render some page after logout
+
+    // Send a success response
+    res.status(200).send({ message: "Logout successful from all devices" });
+
   } catch (error) {
-    res.status(500).send(error);
+    // Log the error for debugging purposes
+    console.error("Error in logoutAllDevices:", error);
+
+    // Send a meaningful error response to the client
+    res.status(500).send({ error: "Internal Server Error" });
+  }
+};
+
+
+
+
+exports.logoutUser = async (req, res) => {
+      
+  try {
+    // Clear the token cookie by setting an expired date
+
+    res.cookie("token", "", { expires: new Date(0), httpOnly: true });
+    res.json({ message: "Logout successful" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
   }
 };

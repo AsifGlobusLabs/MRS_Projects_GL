@@ -67,22 +67,22 @@ const LoginForm = () => {
     
 <form>
   <div class="row mb-4">
-    <label for="inputEmail3" class="col-sm-2 col-form-label">Employee Id:</label>
+    <label for="inputEmail3" class="col-sm-4 col-form-label" style={{color:"black", fontSize:"18px", fontWeight:500}}>Employee Id:</label>
     <div class="col-sm-10">
       <input type="text" class="form-control" id="inputEmail3"   value={employeeId}
             onChange={(e) => setEmployeeId(e.target.value)} />
     </div>
   </div>
   <div class="row mb-4">
-    <label for="inputPassword3" class="col-sm-2 col-form-label">Password:</label>
+    <label for="inputPassword3" class="col-sm-4 col-form-label" style={{color:"black", fontSize:"18px", fontWeight:500}}>Password:</label>
     <div class="col-sm-10">
       <input type="password" class="form-control" id="inputPassword3" value={password}
             onChange={(e) => setPassword(e.target.value)}/>
     </div>
   </div>
  
-  <button type="button" onClick={handleLogin} disabled={loading} 
-  style={{border:"none", width:"100%",background:"#045e83", color:"white", borderRadius:"5px", padding:"5px 0px", marginTop:"10px"}}>
+  <button type="button" onClick={handleLogin} disabled={loading} class="col-sm-10"
+  style={{border:"none",background:"#045e83", color:"white", borderRadius:"5px", padding:"5px 0px", marginTop:"10px"}}>
           {loading ? 'Logging in...' : 'Login'}
         </button>
 </form>
