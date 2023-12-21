@@ -7,7 +7,7 @@ const Task = () => {
   const [assignment, setAssignments] = useState([]);
   // const [isLoading, setIsLoading] = useState(true);
   // const [progressData, setProgressData] = useState([]);
-
+  const [postData, setPostData] = useState();
 
 
   useEffect(() => {
@@ -25,11 +25,37 @@ const Task = () => {
   }, []);
 
 
+
+  const handleToDone = async (code) => {
+    try {
+      const apiUrl = `http://localhost:5000/assignments/${code}/complete`;
+      const response = await fetch(apiUrl, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+          // Add any additional headers if needed
+          // "Authorization": "Bearer your-token",
+        },
+        body: JSON.stringify(postData),
+      });
+
+      if (response.ok) {
+        // The request was successful, handle the response here
+        const result = await response.json();
+        console.log("Response from API:", result);
+      }
+    } catch (error) {
+      // Handle network errors or other exceptions
+      console.error("Error in POST request:", error);
+    }
+    window.location.reload(false);
+  };
+
   return (
    
     <div className='main-container'>
    
-      
+   <h4 className="mb-3">Task List</h4>
 
       <table className="table table-striped">
         <thead style={{ fontSize: "15px" }}>
@@ -42,7 +68,7 @@ const Task = () => {
             <th>assign_date</th>
             <th>deadline_date</th>
             <th>Status</th>
-           
+            <th>Done</th>
           </tr>
         </thead>
 
@@ -56,7 +82,29 @@ const Task = () => {
               <td>{item.to}</td>
               <td>{moment(item.assign_date).format('DD/MM/YYYY')}</td>
               <td>{moment(item.deadline_date).format('DD/MM/YYYY')}</td>
-              <td>{item.status}</td>
+              <td style={{ textAlign: "center" }}>
+                {item.status === "progress" ? (
+                   <span style={{color:"orange"}}>{item.status}</span>
+                ) : (
+                  <span style={{color:"red"}}>{item.status}</span>
+                 
+                )}
+              </td>
+              <td style={{ textAlign: "center" }}>
+                {item.status === "progress" ? (
+                  <i
+                   class="fa-solid fa-circle-notch"
+                    style={{
+                       cursor:"pointer",
+                      color: "orange",
+                      fontSize: "20px",
+                    }}
+                    onClick={() => handleToDone(item.code)}
+                  ></i>
+                ) : (
+                 <></>
+                )}
+              </td>
             </tr>
           ))}
         </tbody>

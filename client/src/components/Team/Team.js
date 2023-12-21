@@ -15,7 +15,7 @@ const Team = () => {
         const response = await fetch('http://localhost:5000/user/registrations');
         const result = await response.json();
         setData(result);
-        console.log(result,"hello")
+        // console.log(result,"hello")
       } catch (error) {
         console.error('Error fetching data:', error);
       }

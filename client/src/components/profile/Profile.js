@@ -16,7 +16,7 @@ const Profile = () => {
     />
     <div className="p-1 sidebar-position">
       <span>
-        <p style={{ fontSize: "16px" }} className="m-0">
+        <p style={{ fontSize: "18px" }} className="m-0">
           ASIF ZIA
         </p>
         <p

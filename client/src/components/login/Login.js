@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const LoginForm = () => {
   const [employeeId, setEmployeeId] = useState('');
@@ -52,7 +52,7 @@ const LoginForm = () => {
   };
   return (
       <div className="main-container p-0">
-       <div className="register-header p-2">
+       <div className="register-header p-2" style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
          <h3
           style={{
             marginLeft: "20px",
@@ -73,11 +73,30 @@ const LoginForm = () => {
             Labs
           </span>
         </h3>
+        <Link to={"/auth/registration"} target="_blank" style={{ textDecoration: "none" }}>
+          <div 
+            style={{
+              color: "white",
+              marginRight: "15px",
+              display: "flex",
+              alignItems:"center",
+            }}
+          >
+            <i class="fa-solid fa-address-card mx-1" style={{fontSize:"19px"}}></i>
+              <span
+                style={{ fontSize: "13px", marginLeft: "1px", fontWeight: 700 }}
+              >
+                REGISTER
+              </span>
+            
+          </div>
+        </Link>
       </div>
-
+ 
       <div className="login-section">
+
      <div className="login-left">
-    
+  
 <form>
   <div class="row mb-4">
     <label for="inputEmail3" class="col-sm-4 col-form-label" style={{color:"black", fontSize:"18px", fontWeight:500}}>Employee Id:</label>
