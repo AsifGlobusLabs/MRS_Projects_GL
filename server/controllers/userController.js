@@ -48,8 +48,21 @@ exports.registerUser = async (req, res) => {
     const confirm_password = req.body.confirm_password;
 
     if (password === confirm_password) {
-      const registration = new User(req.body);
-
+      const registration = new User({
+        first_name :req.body.first_name,
+        last_name :req.body.last_name,
+        address :req.body.address,
+        city :req.body.city,
+        state :req.body.state,
+        phone_number :req.body.phone_number,
+        email :req.body.email,
+        position :req.body.position,
+        employee_id :req.body.employee_id,
+        password :req.body.password,
+        confirm_password:req.body.confirm_password,
+        image:req.file.filename
+      })
+      console.log(req.file);
       const token = await registration.generateAuthToken();
       console.log("the token part is " + token);
 
@@ -76,13 +89,13 @@ exports.getAllRegistrations = async (req, res) => {
 
 exports.logoutAllDevices = async (req, res) => {
   try {
-    console.log("hi");
+
     // Clear user tokens
     req.user.tokens = [];
-    console.log("hi1");
+
     // Clear the token cookie
     res.clearCookie("token");
-    console.log("hi2");
+
     // Save the user with the updated tokens
     await req.user.save();
 
