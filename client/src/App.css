@@ -239,6 +239,7 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  font-family: 'Times New Roman', Times, serif;
 }
 
 .sidebar--open {
@@ -273,13 +274,14 @@ body {
       "main";
   }
 
-  #sidebar {
-    display: none;
-  }
+  /* #sidebar {
+    display: ;
+  } */
 
   .menu-icon {
     display: inline;
   }
+
 
   .sidebar-title > span {
     display: inline;
@@ -375,3 +377,5 @@ body {
   }
     */
 /* End Sidebar  */
+
+

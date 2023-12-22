@@ -26,7 +26,15 @@ function Sidebar() {
       <div className="trigger" onClick={handleTrigger}>
         <FontAwesomeIcon icon={isOpen ? faBars : faTimes} />
       </div>
-      <Profile/>
+
+      <Link
+        to={"/profilepage"}
+        style={{ textDecoration: "none", color: "#fff" }}
+      >
+         <Profile/>
+      </Link>
+     
+
       {/* <a
         href="/"
         style={{ textDecoration: "none", color: "#fff" }}
@@ -114,10 +122,13 @@ function Sidebar() {
         <BsFillGearFill className="icon" />
         <span>Setting</span>
       </div>
+
+      <Link to={"/logout"} style={{ textDecoration: "none", color: "#fff" }}>
       <div className="sidebar-position">
-      <BsArrowRightSquareFill />
+      <BsArrowRightSquareFill className="icon"/>
         <span>Log-out</span>
       </div>
+      </Link>
     </div>
   );
 }

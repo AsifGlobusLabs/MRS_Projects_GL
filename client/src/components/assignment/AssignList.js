@@ -11,18 +11,15 @@ const AssignList = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(7);
 
-
-
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         const apiUrl = "http://localhost:5000/assignments/";
         const response = await fetch(apiUrl);
         const result = await response.json();
-        
-//reverse data in table
-        const reversedData = result.reverse();    
+
+        //reverse data in table
+        const reversedData = result.reverse();
         setData(reversedData);
         setFilteredData(result);
       } catch (error) {
@@ -46,7 +43,7 @@ const AssignList = () => {
       if (response.ok) {
         setData((prevData) => prevData.filter((item) => item._id !== _id));
         setFilteredData((prevData) =>
-          prevData.filter((item) => item._id !== _id)
+          prevData.filter((item) => item._id !== _id),
         );
       } else {
         console.error("Error deleting item:", response.status);
@@ -62,11 +59,13 @@ const AssignList = () => {
       const apiUrl = `http://localhost:5000/assignments/${employee_id}`;
       const response = await fetch(apiUrl);
       const result = await response.json();
-
+      // console.log( result, "test2")
       if (Array.isArray(result)) {
         setFilteredData(result);
+        // console.log( result, "test1")
       } else {
         setFilteredData([result]);
+        // console.log( result, "test3")
       }
     } catch (error) {
       console.error("Error fetching filtered data:", error);
@@ -99,16 +98,13 @@ const AssignList = () => {
     }
   };
 
+  // Calculate the index range for the current page
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
 
-
-    // Calculate the index range for the current page
-    const indexOfLastItem = currentPage * itemsPerPage;
-    const indexOfFirstItem = indexOfLastItem - itemsPerPage;
-    const currentItems = filteredData.slice(indexOfFirstItem, indexOfLastItem);
-  
-    // Change page
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  
+  // Change page
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   return (
     <div>
@@ -137,7 +133,7 @@ const AssignList = () => {
 
         <tbody style={{ fontSize: "13px" }}>
           {currentItems.map((item) => (
-            <tr key={item._id}>
+            <tr key={item._id} >
               <td>{item.code}</td>
               <td>{item.employee_id}</td>
               <td>{item.assignment}</td>
@@ -145,14 +141,24 @@ const AssignList = () => {
               <td>{item.to}</td>
               <td>{moment(item.assign_date).format("DD/MM/YYYY")}</td>
               <td>{moment(item.deadline_date).format("DD/MM/YYYY")}</td>
-              <td>{item.status}</td>
+              {/* <td>{item.status}</td> */}
+
+              <td style={{ textAlign: "center" }}>
+                {item.status === "progress" ? (
+                  <span style={{ color: "orange" }}>{item.status}</span>
+                ) : item.status === "pending" ? (
+                  <span style={{ color: "red" }}>{item.status}</span>
+                ) : (
+                  <span style={{ color: "green" }}>{item.status}</span>
+                )}
+              </td>
 
               <td style={{ textAlign: "center" }}>
                 <i
                   className="fa-solid fa-pen-to-square"
                   style={{
                     cursor: "pointer",
-                    color: "#0084ff",
+                    color: "#045e83",
                     fontSize: "16px",
                   }}
                 ></i>
@@ -166,17 +172,8 @@ const AssignList = () => {
               </td>
 
               <td style={{ textAlign: "center" }}>
-                {item.status === "progress" ? (
-                  <i
-                 class="fa-solid fa-spinner"
-                    style={{
-                    
-                      color: "orange",
-                      fontSize: "20px",
-                    }}
-                    
-                  ></i>
-                ) : (
+                {item.status === "pending" ? (
+                  
                   <i
                     className="fa-solid fa-square-plus"
                     style={{
@@ -186,24 +183,64 @@ const AssignList = () => {
                     }}
                     onClick={() => handleAddToTask(item.code)}
                   ></i>
+                ) : item.status === "progress" ?(
+                  <i
+                    class="fa-solid fa-spinner"
+                    style={{
+                      color: "orange",
+                      fontSize: "20px",
+                    }}
+                  ></i>
+                ) :  (
+                  <i
+                   class="fa-solid fa-circle-check"
+                    style={{
+                      color: "green",
+                      fontSize: "20px",
+
+                    }}
+                  ></i>
                 )}
               </td>
+
+
+              
             </tr>
           ))}
         </tbody>
       </table>
-        {/* Pagination */}
-        <ul className="pagination">
-        {Array.from({ length: Math.ceil(filteredData.length / itemsPerPage) }, (_, index) => (
-          <li key={index} className="page-item">
-            <button onClick={() => paginate(index + 1)} className="page-link">
-              {index + 1}
-            </button>
-          </li>
-        ))}
+      {/* Pagination */}
+      <ul className="pagination">
+        {Array.from(
+          { length: Math.ceil(filteredData.length / itemsPerPage) },
+          (_, index) => (
+            <li key={index} className="page-item">
+              <button onClick={() => paginate(index + 1)} className="page-link">
+                {index + 1}
+              </button>
+            </li>
+          ),
+        )}
       </ul>
     </div>
   );
 };
 
 export default AssignList;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

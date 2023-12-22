@@ -10,6 +10,8 @@ import Team from "./components/Team/Team";
 import Home from "./components/home/Home";
 import Assignment from "./components/assignment/Assignment";
 import Task from "./components/Task";
+import ProfilePage from "./components/profile/ProfilePage";
+import Logout from "./components/logout/Logout";
 // import LoginForm from "./components/login/Login";
 
 
@@ -39,9 +41,11 @@ function App() {
             {/* Main Routes */}
             {/* <Route path="/" element={<MainRoutes />} /> */}
             <Route path="/" element={<Home />} />
+            <Route path="/profilepage" element={<ProfilePage/>} />
             <Route path="/assignment" element={<Assignment />} />
             <Route path="/task" element={<Task />} />
             <Route path="/team" element={<Team />} />
+            <Route path="/logout" element={<Logout/>} />
           </Routes>
         </div>
       )}

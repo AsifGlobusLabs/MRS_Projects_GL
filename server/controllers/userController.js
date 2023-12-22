@@ -90,13 +90,13 @@ exports.getAllRegistrations = async (req, res) => {
 
 exports.logoutAllDevices = async (req, res) => {
   try {
-
+    
     // Clear user tokens
     req.user.tokens = [];
-
+   
     // Clear the token cookie
     res.clearCookie("token");
-
+    
     // Save the user with the updated tokens
     await req.user.save();
 
