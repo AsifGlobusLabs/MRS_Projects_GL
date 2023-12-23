@@ -11,6 +11,20 @@ exports.createAssignment = async (req, res) => {
   }
 };
 
+
+
+// exports.getAllAssignments = async (req, res) => {
+//   try {
+//     const assignments = await Assignment.find();
+//     res.send(assignments);
+//   } catch (error) {
+//     res.status(500).send(error);
+//   }
+// };
+
+
+
+
 exports.getAllAssignments = async (req, res) => {
   try {
     // console.log(req.user.role);
@@ -153,8 +167,17 @@ exports.completeAssignmentStatus = async (req, res) => {
 
 exports.getAssignmentStatus = async (req, res) => {
   try {
-    const status = await Assignment.find({ status: "progress" });
-    res.json(status);
+    if (req.user.role === "admin") {
+      const status = await Assignment.find({ status: "progress" });
+      res.send(status);
+    } else {
+      employee_id = req.user.employee_id;
+      const status = await Assignment.find({
+        employee_id: employee_id,
+        status: "progress",
+      });
+      res.send(status);
+    }
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
