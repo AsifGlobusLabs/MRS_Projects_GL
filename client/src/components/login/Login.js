@@ -40,7 +40,7 @@ const LoginForm = () => {
       if (data.user.role === "admin") {
         navigate("/"); // Navigate to the admin route
       } else {
-        navigate("/contact"); // Navigate to the user route
+        navigate("/task"); // Navigate to the user route
       }
     }
   } catch (error) {

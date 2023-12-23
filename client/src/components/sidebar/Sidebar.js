@@ -28,7 +28,7 @@ function Sidebar() {
       </div>
 
       <Link
-        to={"/profilepage"}
+        to={"/"}
         style={{ textDecoration: "none", color: "#fff" }}
       >
          <Profile/>
@@ -122,13 +122,6 @@ function Sidebar() {
         <BsFillGearFill className="icon" />
         <span>Setting</span>
       </div>
-
-      <Link to={"/logout"} style={{ textDecoration: "none", color: "#fff" }}>
-      <div className="sidebar-position">
-      <BsArrowRightSquareFill className="icon"/>
-        <span>Log-out</span>
-      </div>
-      </Link>
     </div>
   );
 }

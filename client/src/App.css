@@ -30,7 +30,7 @@ body {
 }
 
 .home {
-  background-image: url("./components/homebg.jpg");
+  background-image: url("./components/home/homebg.jpg");
   background-size: cover;
   opacity: 0.7;
   background-position: center;
@@ -108,6 +108,11 @@ body {
   width: auto;
   /* border-radius: 30%; */
   padding: 20px;
+}
+
+.team-modal-pic{
+  width: 15vw;
+  padding: 10px;
 }
 
 /* register form  */
@@ -240,6 +245,11 @@ body {
   overflow: hidden;
   text-overflow: ellipsis;
   font-family: 'Times New Roman', Times, serif;
+}
+
+.sidebar .profile-btn{
+width: 100%;
+
 }
 
 .sidebar--open {
