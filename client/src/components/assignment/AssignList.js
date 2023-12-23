@@ -15,9 +15,16 @@ const AssignList = () => {
     const fetchData = async () => {
       try {
         const apiUrl = "http://localhost:5000/assignments/";
-        const response = await fetch(apiUrl);
-        const result = await response.json();
-
+        const response = await fetch(apiUrl, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials:"include"
+        });
+     
+       const result = await response.json();
+       console.log(result,"hello")
         //reverse data in table
         const reversedData = result.reverse();
         setData(reversedData);
@@ -54,23 +61,23 @@ const AssignList = () => {
   };
 
   // -----------filter data-------
-  const filterData = async (employee_id) => {
-    try {
-      const apiUrl = `http://localhost:5000/assignments/${employee_id}`;
-      const response = await fetch(apiUrl);
-      const result = await response.json();
-      // console.log( result, "test2")
-      if (Array.isArray(result)) {
-        setFilteredData(result);
-        // console.log( result, "test1")
-      } else {
-        setFilteredData([result]);
-        // console.log( result, "test3")
-      }
-    } catch (error) {
-      console.error("Error fetching filtered data:", error);
-    }
-  };
+  // const filterData = async (employee_id) => {
+  //   try {
+  //     const apiUrl = `http://localhost:5000/assignments/${employee_id}`;
+  //     const response = await fetch(apiUrl);
+  //     const result = await response.json();
+  //     // console.log( result, "test2")
+  //     if (Array.isArray(result)) {
+  //       setFilteredData(result);
+  //       // console.log( result, "test1")
+  //     } else {
+  //       setFilteredData([result]);
+  //       // console.log( result, "test3")
+  //     }
+  //   } catch (error) {
+  //     console.error("Error fetching filtered data:", error);
+  //   }
+  // };
 
   // ------------add to task-----------
   const handleAddToTask = async (code) => {
@@ -110,9 +117,9 @@ const AssignList = () => {
     <div>
       <h4 className="mb-3">Assignment List</h4>
 
-      <button onClick={() => filterData("")}>All Data</button>
+      {/* <button onClick={() => filterData("")}>All Data</button>
       <button onClick={() => filterData("GL001")}>Employee ID GL001</button>
-      <button onClick={() => filterData("GL002")}>Employee ID GL002</button>
+      <button onClick={() => filterData("GL002")}>Employee ID GL002</button> */}
 
       <table className="table table-striped">
         <thead style={{ fontSize: "15px" }}>
@@ -173,7 +180,7 @@ const AssignList = () => {
 
               <td style={{ textAlign: "center" }}>
                 {item.status === "pending" ? (
-                  
+
                   <i
                     className="fa-solid fa-square-plus"
                     style={{
@@ -203,8 +210,6 @@ const AssignList = () => {
                 )}
               </td>
 
-
-              
             </tr>
           ))}
         </tbody>
@@ -227,14 +232,6 @@ const AssignList = () => {
 };
 
 export default AssignList;
-
-
-
-
-
-
-
-
 
 
 

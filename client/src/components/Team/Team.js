@@ -61,7 +61,14 @@ const Team = () => {
     // Fetch data from the API
     const fetchData = async () => {
       try {
-        const response = await fetch('http://localhost:5000/user/registrations');
+        const response = await fetch('http://localhost:5000/user/registrations', {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials:"include"
+        });
+
         const result = await response.json();
         setData(result);
       } catch (error) {

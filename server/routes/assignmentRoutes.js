@@ -5,6 +5,7 @@ const router = express.Router();
 const assignmentController = require('../controllers/assignmentController');
 
 router.post('/', assignmentController.createAssignment);
+// router.get('/',auth, assignmentController.getAllAssignments);
 router.get('/',auth, assignmentController.getAllAssignments);
 router.get('/assignment-codes', assignmentController.getAssignmentCodes);
 router.get('/latest-assignment-code', assignmentController.getLatestAssignmentCode);

@@ -11,6 +11,20 @@ exports.createAssignment = async (req, res) => {
   }
 };
 
+
+
+// exports.getAllAssignments = async (req, res) => {
+//   try {
+//     const assignments = await Assignment.find();
+//     res.send(assignments);
+//   } catch (error) {
+//     res.status(500).send(error);
+//   }
+// };
+
+
+
+
 exports.getAllAssignments = async (req, res) => {
   try {
     // console.log(req.user.role);

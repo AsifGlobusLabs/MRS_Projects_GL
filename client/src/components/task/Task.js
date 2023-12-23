@@ -4,18 +4,29 @@ import axios from "axios";
 
 
 const Task = () => {
-  const [assignment, setAssignments] = useState([]);
-  // const [isLoading, setIsLoading] = useState(true);
-  // const [progressData, setProgressData] = useState([]);
-  const [postData, setPostData] = useState();
+ const [postData, setPostData] = useState();
+  const [data, setData] = useState([]);
+
 
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/assignments/');
-        const progressAssignments = response.data.filter(assignment => assignment.status === 'progress');
-        setAssignments(progressAssignments);
+        const apiUrl = "http://localhost:5000/assignments/status/progress";
+        const response = await fetch(apiUrl, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          credentials:"include"
+        });
+     
+       
+
+        // const progressAssignments = response.data.filter(assignment => assignment.status === 'progress');
+        // setAssignments(progressAssignments);
+        const result = await response.json();
+        setData(result);
       } catch (error) {
         console.error('Error fetching assignments:', error);
       }
@@ -73,7 +84,7 @@ const Task = () => {
         </thead>
 
         <tbody style={{ fontSize: "13px" }}>
-          {assignment.map((item) => (
+          {data.map((item) => (
             <tr key={item._id}>
               <td>{item.code}</td>
               <td>{item.employee_id}</td>
