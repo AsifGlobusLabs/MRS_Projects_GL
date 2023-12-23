@@ -27,7 +27,7 @@ router.post('/login', userController.loginUser);
 
 // Registration
 router.post('/register',upload.single('image'), userController.registerUser);
-router.get('/registrations', userController.getAllRegistrations);
+router.get('/registrations', auth, userController.getAllRegistrations);
 
 // Logout from single device
 router.get('/logout', auth, userController.logoutUser);

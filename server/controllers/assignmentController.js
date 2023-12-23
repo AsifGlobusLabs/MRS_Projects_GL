@@ -1,5 +1,5 @@
 // controllers/assignmentController.js
-const Assignment = require('../models/assignmentModel');
+const Assignment = require("../models/assignmentModel");
 
 exports.createAssignment = async (req, res) => {
   try {
@@ -13,8 +13,17 @@ exports.createAssignment = async (req, res) => {
 
 exports.getAllAssignments = async (req, res) => {
   try {
-    const assignments = await Assignment.find();
-    res.send(assignments);
+    // console.log(req.user.role);
+    if (req.user.role === "admin") {
+      const assignments = await Assignment.find();
+      res.send(assignments);
+    }else{
+      employee_id = req.user.employee_id;
+      const assignments = await Assignment.find({
+        employee_id: employee_id,
+      });
+      res.send(assignments);
+    }
   } catch (error) {
     res.status(500).send(error);
   }
@@ -22,7 +31,7 @@ exports.getAllAssignments = async (req, res) => {
 
 exports.getAssignmentCodes = async (req, res) => {
   try {
-    const codes = await Assignment.find().select('code');
+    const codes = await Assignment.find().select("code");
     res.json(codes);
   } catch (error) {
     res.status(500).json({ message: error.message });
@@ -34,7 +43,7 @@ exports.getLatestAssignmentCode = async (req, res) => {
     const latestAssignment = await Assignment.findOne().sort({ code: -1 });
 
     if (!latestAssignment) {
-      return res.status(404).json({ message: 'No assignments found' });
+      return res.status(404).json({ message: "No assignments found" });
     }
 
     res.json({ code: latestAssignment.code });
@@ -45,10 +54,12 @@ exports.getLatestAssignmentCode = async (req, res) => {
 
 exports.getLatestAssignmentEmployeeId = async (req, res) => {
   try {
-    const latestAssignmentemp = await Assignment.findOne().sort({ employee_id: -1 });
+    const latestAssignmentemp = await Assignment.findOne().sort({
+      employee_id: -1,
+    });
 
     if (!latestAssignmentemp) {
-      return res.status(404).json({ message: 'No assignments found' });
+      return res.status(404).json({ message: "No assignments found" });
     }
 
     res.json({ employee_id: latestAssignmentemp.employee_id });
@@ -60,7 +71,9 @@ exports.getLatestAssignmentEmployeeId = async (req, res) => {
 exports.getAssignmentDetailsByEmployeeId = async (req, res) => {
   try {
     const employee_id = req.params.employee_id;
-    const assignmentDetails = await Assignment.findOne({ employee_id: employee_id });
+    const assignmentDetails = await Assignment.findOne({
+      employee_id: employee_id,
+    });
 
     if (!assignmentDetails) {
       return res.status(404).send();
@@ -75,7 +88,11 @@ exports.getAssignmentDetailsByEmployeeId = async (req, res) => {
 exports.updateAssignment = async (req, res) => {
   try {
     const _id = req.params.id;
-    const updateAssignment = await Assignment.findByIdAndUpdate({ _id: _id }, req.body, { new: true });
+    const updateAssignment = await Assignment.findByIdAndUpdate(
+      { _id: _id },
+      req.body,
+      { new: true },
+    );
     res.send(updateAssignment);
   } catch (error) {
     res.status(400).send();
@@ -98,7 +115,7 @@ exports.progressAssignmentStatus = async (req, res) => {
     const assignment = await Assignment.findOne({ code: code });
 
     if (!assignment) {
-      return res.status(404).json({ error: 'Assignment not found' });
+      return res.status(404).json({ error: "Assignment not found" });
     }
 
     // Validate the progress value further if needed
@@ -110,28 +127,27 @@ exports.progressAssignmentStatus = async (req, res) => {
     res.status(200).json(assignment);
   } catch (error) {
     console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
+    res.status(500).json({ error: "Internal Server Error" });
   }
 };
 
 exports.completeAssignmentStatus = async (req, res) => {
   const code = req.params.code;
 
-
   try {
     const assignment = await Assignment.findOne({ code: code });
 
     if (!assignment) {
-      return res.status(404).send({ error: 'Assignment not found' });
+      return res.status(404).send({ error: "Assignment not found" });
     }
 
-    assignment.status = 'completed'; // Assuming 'completed' corresponds to 'status'
+    assignment.status = "completed"; // Assuming 'completed' corresponds to 'status'
     await assignment.save();
 
     res.status(200).json(assignment);
   } catch (error) {
     console.error(error);
-    res.status(500).send({ error: 'Internal Server Error' });
+    res.status(500).send({ error: "Internal Server Error" });
   }
 };
 
@@ -143,4 +159,3 @@ exports.getAssignmentStatus = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
-

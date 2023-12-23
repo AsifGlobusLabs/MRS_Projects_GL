@@ -41,7 +41,6 @@ exports.loginUser = async (req, res) => {
 }
 
 
-
 exports.registerUser = async (req, res) => {
   try {
     const password = req.body.password;
@@ -72,19 +71,21 @@ exports.registerUser = async (req, res) => {
       res.status(404).send("Password is not matched");
     }
   } catch (error) {
-    res.status(400).send(error);
+    console.error(error);
+    res.status(500).send("Internal Server Error");
   }
 };
+
 
 exports.getAllRegistrations = async (req, res) => {
   try {
     const registrations = await User.find();
     res.send(registrations);
   } catch (error) {
-    res.status(500).send(error);
+    console.error(error);
+    res.status(500).send("Internal Server Error");
   }
 };
-
 
 
 exports.logoutAllDevices = async (req, res) => {
@@ -110,8 +111,6 @@ exports.logoutAllDevices = async (req, res) => {
     res.status(500).send({ error: "Internal Server Error" });
   }
 };
-
-
 
 
 exports.logoutUser = async (req, res) => {
