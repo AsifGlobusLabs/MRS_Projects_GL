@@ -2,24 +2,20 @@
 const mongoose = require('mongoose');
 
 const assignmentSchema = new mongoose.Schema({
-  code : {
+  task_no : {
     type : String,
     required : true,
     unique : true
   },
-  employee_id : {
+  task_details: {
     type : String,
     required : true
   },
-  assignment: {
+  task_given_by: {
     type : String,
     required : true
   },
-  from: {
-    type : String,
-    required : true
-  },
-  to: {
+  employee: {
     type : String,
     required : true
   },
