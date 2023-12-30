@@ -4,11 +4,11 @@ import AssignList from "./AssignList";
 
 const AssignmentModal = ({ show, onHide }) => {
   const [formData, setFormData] = useState({
-    code: "",
-    employee_id: "",
-    assignment: "",
-    from: "",
-    to: "",
+    task_no: "",
+    // employee_id: "",
+    task_details: "",
+    task_given_by: "",
+    employee: "",
     assign_date: new Date().toISOString().split("T")[0],
     deadline_date: "",
   });
@@ -50,7 +50,7 @@ const AssignmentModal = ({ show, onHide }) => {
         );
         const newCodeNumber = incrementCodeNumber(latestCodeNumber);
         console.log(newCodeNumber);
-        setFormData((prevData) => ({ ...prevData, code: newCodeNumber }));
+        setFormData((prevData) => ({ ...prevData, task_no: newCodeNumber }));
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -63,7 +63,7 @@ const AssignmentModal = ({ show, onHide }) => {
     try {
       const response = await fetch(apiUrl);
       const data = await response.json();
-      return data.code;
+      return data.task_no;
     } catch (error) {
       console.error("Error fetching latest code number:", error);
       throw error;
@@ -107,11 +107,11 @@ const AssignmentModal = ({ show, onHide }) => {
     } finally {
       setIsLoading(false);
       setFormData({
-        code: "",
+        task_no: "",
         employee_id: "",
-        assignment: "",
-        from: "",
-        to: "",
+        task_details: "",
+        task_given_by: "",
+        employee: "",
         assign_date: "",
         deadline_date: "",
       });
@@ -137,17 +137,17 @@ const AssignmentModal = ({ show, onHide }) => {
             <div className="container">
               <div className="row">
                 <div className="mb-3 col-2">
-                  <label htmlFor="exampleInputEmail1" className="form-label">
+                  <label htmlFor="task_no" className="form-label">
                     Task Number:
                   </label>
                   <input
                     type="text"
                     className="form-control"
-                    placeholder="Enter code"
-                    name="code"
-                    value={formData.code}
+                    placeholder="Enter Task No."
+                    name="task_no"
+                    value={formData.task_no}
                     onChange={handleInputChange}
-                    //   readOnly
+                      // readOnly
                   />
                 </div>
                 {/* <div className="mb-3 col">
@@ -163,7 +163,7 @@ const AssignmentModal = ({ show, onHide }) => {
                 </div> */}
               </div>
               <div className="mb-3 col">
-                <label htmlFor="assignment" className="form-label">
+                <label htmlFor="task_details" className="form-label">
                   Task Details:
                 </label>
                 <textarea
@@ -171,22 +171,22 @@ const AssignmentModal = ({ show, onHide }) => {
                   className="form-control"
                   id="assignment"
                   placeholder="Write Something...."
-                  name="assignment"
-                  value={formData.assignment}
+                  name="task_details"
+                  value={formData.task_details}
                   onChange={handleInputChange}
                 />
               </div>
 
               <div className="row">
                 <div className="mb-3 col">
-                  <label htmlFor="from" className="form-label">
+                  <label htmlFor="task_given_by" className="form-label">
                     From:
                   </label>
                   <select
                     className="form-select"
                     aria-label="Default select example"
-                    name="from"
-                    value={formData.from}
+                    name="task_given_by"
+                    value={formData.task_given_by}
                     onChange={handleInputChange}
                   >
                     <option selected>Please Select</option>
@@ -196,15 +196,15 @@ const AssignmentModal = ({ show, onHide }) => {
                 </div>
 
                 <div className="mb-3 col">
-                  <label htmlFor="to" className="form-label">
+                  <label htmlFor="employee" className="form-label">
                     Assign To:
                   </label>
 
                   <select
                     className="form-select"
                     aria-label="Default select example"
-                    name="to"
-                    value={formData.to}
+                    name="employee"
+                    value={formData.employee}
                     onChange={handleInputChange}
                   >
                     <option selected>Please Select</option>
@@ -212,7 +212,6 @@ const AssignmentModal = ({ show, onHide }) => {
                       <option key={item._id}  >
                         {item.employee_id} - {item.first_name} {item.last_name}
                       </option>
-                   
                     ))}
                   </select>
                 </div>
@@ -227,7 +226,7 @@ const AssignmentModal = ({ show, onHide }) => {
                   <input
                     type="date"
                     className="form-control"
-                    name="date"
+                    name="assign_date"
                     value={formData.assign_date}
                     onChange={handleInputChange}
                   />

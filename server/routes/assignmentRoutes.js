@@ -14,8 +14,8 @@ router.get('/:employee_id', assignmentController.getAssignmentDetailsByEmployeeI
 router.patch('/:id', assignmentController.updateAssignment);
 router.delete('/:id', assignmentController.deleteAssignment);
 router.get('/status/progress',auth, assignmentController.getAssignmentStatus);
-router.patch('/:code/progress', assignmentController.progressAssignmentStatus);
-router.patch('/:code/complete', assignmentController.completeAssignmentStatus);
+router.patch('/:task_no/progress', assignmentController.progressAssignmentStatus);
+router.patch('/:task_no/complete', assignmentController.completeAssignmentStatus);
 // router.get('/status', assignmentController.getAssignmentStatus);
 
 

@@ -37,9 +37,9 @@ const Task = () => {
 
 
 
-  const handleToDone = async (code) => {
+  const handleToDone = async (task_no) => {
     try {
-      const apiUrl = `http://localhost:5000/assignments/${code}/complete`;
+      const apiUrl = `http://localhost:5000/assignments/${task_no}/complete`;
       const response = await fetch(apiUrl, {
         method: "PATCH",
         headers: {
@@ -72,10 +72,10 @@ const Task = () => {
         <thead style={{ fontSize: "15px" }}>
           <tr>
             <th>Code</th>
-            <th>Employee Id</th>
+            {/* <th>Employee Id</th> */}
             <th>Assignment</th>
-            <th>From</th>
-            <th>To</th>
+            <th>Task given by</th>
+            <th>Assign To</th>
             <th>Assign Date</th>
             <th>Deadline Date</th>
             <th>Status</th>
@@ -86,11 +86,11 @@ const Task = () => {
         <tbody style={{ fontSize: "13px" }}>
           {data.map((item) => (
             <tr key={item._id}>
-              <td>{item.code}</td>
-              <td>{item.employee_id}</td>
-              <td>{item.assignment}</td>
-              <td>{item.from}</td>
-              <td>{item.to}</td>
+              <td>{item.task_no}</td>
+              {/* <td>{item.employee_id}</td> */}
+              <td>{item.task_details}</td>
+              <td>{item.task_given_by}</td>
+              <td>{item.employee}</td>
               <td>{moment(item.assign_date).format('DD/MM/YYYY')}</td>
               <td>{moment(item.deadline_date).format('DD/MM/YYYY')}</td>
               <td style={{ textAlign: "center" }}>
@@ -102,7 +102,7 @@ const Task = () => {
                 )}
               </td>
               <td style={{ textAlign: "center" }}>
-                {item.status === "progress" ? (
+                {item.status === "Progress" ? (
                   <i
                    class="fa-solid fa-circle-notch"
                     style={{
@@ -110,7 +110,7 @@ const Task = () => {
                       color: "orange",
                       fontSize: "20px",
                     }}
-                    onClick={() => handleToDone(item.code)}
+                    onClick={() => handleToDone(item.task_no)}
                   ></i>
                 ) : (
                  <></>

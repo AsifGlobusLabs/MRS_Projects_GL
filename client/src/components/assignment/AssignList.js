@@ -9,7 +9,7 @@ const AssignList = () => {
   const [filteredData, setFilteredData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const [itemsPerPage] = useState(7);
+  const [itemsPerPage] = useState(50);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -80,9 +80,9 @@ const AssignList = () => {
   // };
 
   // ------------add to task-----------
-  const handleAddToTask = async (code) => {
+  const handleAddToTask = async (task_no) => {
     try {
-      const apiUrl = `http://localhost:5000/assignments/${code}/progress`;
+      const apiUrl = `http://localhost:5000/assignments/${task_no}/progress`;
       const response = await fetch(apiUrl, {
         method: "PATCH", // or 'PUT' depending on your API
         headers: {
@@ -177,10 +177,10 @@ const AssignList = () => {
         <thead style={{ fontSize: "15px" }}>
           <tr>
             <th>Task No.</th>
-            <th>Employee Id</th>
+            {/* <th>Employee Id</th> */}
             <th>Assignment</th>
-            <th>From</th>
-            <th>To</th>
+            <th>Task given by</th>
+            <th>Assign To</th>
             <th>Assign Date</th>
             <th>Deadline Date</th>
             <th>Status</th>
@@ -193,19 +193,19 @@ const AssignList = () => {
         <tbody style={{ fontSize: "13px" }}>
           {currentItems.map((item) => (
             <tr key={item._id}>
-              <td>{item.code}</td>
-              <td>{item.employee_id}</td>
-              <td className="overflow-cell">{item.assignment}</td>
-              <td>{item.from}</td>
-              <td>{item.to}</td>
+              <td>{item.task_no}</td>
+              {/* <td>{item.employee_id}</td> */}
+              <td className="overflow-cell">{item.task_details}</td>
+              <td>{item.task_given_by}</td>
+              <td>{item.employee}</td>
               <td>{moment(item.assign_date).format("DD/MM/YYYY")}</td>
               <td>{moment(item.deadline_date).format("DD/MM/YYYY")}</td>
               {/* <td>{item.status}</td> */}
 
               <td style={{ textAlign: "center" }}>
-                {item.status === "progress" ? (
+                {item.status === "Progress" ? (
                   <span style={{ color: "orange" }}>{item.status}</span>
-                ) : item.status === "pending" ? (
+                ) : item.status === "Pending" ? (
                   <span style={{ color: "red" }}>{item.status}</span>
                 ) : (
                   <span style={{ color: "green" }}>{item.status}</span>
@@ -231,7 +231,7 @@ const AssignList = () => {
               </td>
 
               <td style={{ textAlign: "center" }}>
-                {item.status === "pending" ? (
+                {item.status === "Pending" ? (
                   <i
                     className="fa-solid fa-square-plus"
                     style={{
@@ -239,9 +239,9 @@ const AssignList = () => {
                       color: "#0084ff",
                       fontSize: "20px",
                     }}
-                    onClick={() => handleAddToTask(item.code)}
+                    onClick={() => handleAddToTask(item.task_no)}
                   ></i>
-                ) : item.status === "progress" ? (
+                ) : item.status === "Progress" ? (
                   <i
                     className="fa-solid fa-spinner"
                     style={{
