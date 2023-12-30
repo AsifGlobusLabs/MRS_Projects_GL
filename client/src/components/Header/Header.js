@@ -33,7 +33,7 @@ function Header({ OpenSidebar }) {
             textDecoration: "none"}}>
            <div
             style={{
-              color: "#850000",
+              color: "#1B4242",
               marginRight: "15px",
               display: "flex",
               alignItems:"center",
@@ -50,7 +50,7 @@ function Header({ OpenSidebar }) {
         <Link to={"/auth/registration"} target="_blank" style={{ textDecoration: "none" }}>
           <div 
             style={{
-              color: "#850000",
+              color: "#1B4242",
               marginRight: "15px",
               display: "flex",
               alignItems:"center",

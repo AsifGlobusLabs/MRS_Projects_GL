@@ -17,9 +17,7 @@ exports.loginUser = async (req, res) => {
       return res.status(401).json({ message: 'Invalid credentials' });
     }
 
-    const token = jwt.sign({ employee_id: employee_id, role: user.role }, SECRET_KEY, {
-      expiresIn: '1h',
-    });
+    const token = jwt.sign({ employee_id: employee_id, role: user.role }, SECRET_KEY);
 
     res.cookie('token', token, { httpOnly: true });
 

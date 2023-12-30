@@ -20,11 +20,11 @@ const AssignList = () => {
           headers: {
             "Content-Type": "application/json",
           },
-          credentials:"include"
+          credentials: "include",
         });
-     
-       const result = await response.json();
-       console.log(result,"hello")
+
+        const result = await response.json();
+        // console.log(result, "hello");
         //reverse data in table
         const reversedData = result.reverse();
         setData(reversedData);
@@ -112,10 +112,62 @@ const AssignList = () => {
 
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  
+
+  // const renderAddIcon = (item) => {
+  //   if (item.status === "pending") {
+  //     console.log(item,"status");
+  //     if ( item.role === "user"){
+  //       console.log(item.role, "user");
+  //     return (
+  //       <i
+  //         className="fa-solid fa-square-plus"
+  //         style={{
+  //           cursor: "pointer",
+  //           color: "#0084ff",
+  //           fontSize: "20px",
+  //         }}
+  //         onClick={() => handleAddToTask(item.code)}
+  //       ></i>
+  //     )} else {
+  //       return(
+  //         <i
+  //         className="fa-solid fa-hourglass-half"
+  //         style={{
+  //           color: "orange",
+  //           fontSize: "20px",
+  //         }}
+  //       ></i>
+  //       )
+  //      }
+  //   } 
+
+  //  else if (item.status === "progress") {
+  //     return (
+  //       <i
+  //         className="fa-solid fa-spinner"
+  //         style={{
+  //           color: "orange",
+  //           fontSize: "20px",
+  //         }}
+  //       ></i>
+  //     );
+  //   } else {
+  //     return (
+  //       <i
+  //         className="fa-solid fa-circle-check"
+  //         style={{
+  //           color: "green",
+  //           fontSize: "20px",
+  //         }}
+  //       ></i>
+  //     );
+  //   }
+  // };
 
   return (
     <div>
-      <h4 className="mb-3">Assignment List</h4>
+      
 
       {/* <button onClick={() => filterData("")}>All Data</button>
       <button onClick={() => filterData("GL001")}>Employee ID GL001</button>
@@ -124,26 +176,26 @@ const AssignList = () => {
       <table className="table table-striped">
         <thead style={{ fontSize: "15px" }}>
           <tr>
-            <th>code</th>
-            <th>Employee id</th>
+            <th>Task No.</th>
+            <th>Employee Id</th>
             <th>Assignment</th>
-            <th>from</th>
-            <th>to</th>
-            <th>assign_date</th>
-            <th>deadline_date</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Assign Date</th>
+            <th>Deadline Date</th>
             <th>Status</th>
-            <th>edit</th>
-            <th>delete</th>
+            <th>Edit</th>
+            <th>Delete</th>
             <th>Add</th>
           </tr>
         </thead>
 
         <tbody style={{ fontSize: "13px" }}>
           {currentItems.map((item) => (
-            <tr key={item._id} >
+            <tr key={item._id}>
               <td>{item.code}</td>
               <td>{item.employee_id}</td>
-              <td>{item.assignment}</td>
+              <td className="overflow-cell">{item.assignment}</td>
               <td>{item.from}</td>
               <td>{item.to}</td>
               <td>{moment(item.assign_date).format("DD/MM/YYYY")}</td>
@@ -180,7 +232,6 @@ const AssignList = () => {
 
               <td style={{ textAlign: "center" }}>
                 {item.status === "pending" ? (
-
                   <i
                     className="fa-solid fa-square-plus"
                     style={{
@@ -190,26 +241,27 @@ const AssignList = () => {
                     }}
                     onClick={() => handleAddToTask(item.code)}
                   ></i>
-                ) : item.status === "progress" ?(
+                ) : item.status === "progress" ? (
                   <i
-                    class="fa-solid fa-spinner"
+                    className="fa-solid fa-spinner"
                     style={{
                       color: "orange",
                       fontSize: "20px",
                     }}
                   ></i>
-                ) :  (
+                ) : (
                   <i
-                   class="fa-solid fa-circle-check"
+                    className="fa-solid fa-circle-check"
                     style={{
                       color: "green",
                       fontSize: "20px",
-
                     }}
                   ></i>
                 )}
               </td>
 
+
+              {/* <td style={{ textAlign: "center" }}> {renderAddIcon(item)}</td> */}
             </tr>
           ))}
         </tbody>
@@ -232,12 +284,3 @@ const AssignList = () => {
 };
 
 export default AssignList;
-
-
-
-
-
-
-
-
-

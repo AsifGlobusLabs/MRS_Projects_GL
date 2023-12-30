@@ -71,13 +71,13 @@ const Task = () => {
       <table className="table table-striped">
         <thead style={{ fontSize: "15px" }}>
           <tr>
-            <th>code</th>
-            <th>Employee id</th>
+            <th>Code</th>
+            <th>Employee Id</th>
             <th>Assignment</th>
-            <th>from</th>
-            <th>to</th>
-            <th>assign_date</th>
-            <th>deadline_date</th>
+            <th>From</th>
+            <th>To</th>
+            <th>Assign Date</th>
+            <th>Deadline Date</th>
             <th>Status</th>
             <th>Done</th>
           </tr>

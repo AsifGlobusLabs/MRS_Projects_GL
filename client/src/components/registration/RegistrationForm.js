@@ -190,7 +190,7 @@ const RegistrationForm = () => {
         <div className="left-register">
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Row className="mb-3">
-              <Form.Group as={Col} md="6">
+              <Form.Group as={Col} md="4">
                 <Form.Label>First name</Form.Label>
                 <Form.Control
                   required
@@ -200,7 +200,7 @@ const RegistrationForm = () => {
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               </Form.Group>
-              <Form.Group as={Col} md="6">
+              <Form.Group as={Col} md="4">
                 <Form.Label>Last name</Form.Label>
                 <Form.Control
                   required
@@ -214,7 +214,7 @@ const RegistrationForm = () => {
             </Row>
 
             <Row className="mb-3">
-              <Form.Group as={Col} md="6">
+              <Form.Group as={Col} md="4">
                 <Form.Label>Position</Form.Label>
                 <Form.Select aria-label="Default select example" value={position} onChange={(e) => setPosition(e.target.value)}>
                   <option>select Position</option>
@@ -225,7 +225,7 @@ const RegistrationForm = () => {
                 </Form.Select>
               </Form.Group>
 
-              <Form.Group as={Col} md="6" >
+              <Form.Group as={Col} md="4" >
                 <Form.Label>Employee ID</Form.Label>
                 <InputGroup hasValidation>
                   <Form.Control
@@ -245,14 +245,14 @@ const RegistrationForm = () => {
             </Row>
 
             <Row className="mb-3">
-              <Form.Group as={Col} md="6">
+              <Form.Group as={Col} md="4">
                 <Form.Label>Email</Form.Label>
                 <Form.Control required type="email" placeholder="Enter Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
                 <Form.Control.Feedback>
                   Please Enter Email
                 </Form.Control.Feedback>
               </Form.Group>
-              <Form.Group as={Col} md="6">
+              <Form.Group as={Col} md="4">
                 <Form.Label>Phone Number</Form.Label>
                 <Form.Control
                   required
@@ -268,21 +268,21 @@ const RegistrationForm = () => {
             </Row>
 
             <Row className="mb-3">
-              <Form.Group as={Col} md="6" >
+              <Form.Group as={Col} md="4" >
                 <Form.Label>Address</Form.Label>
                 <Form.Control type="text" placeholder="Address.." required value={address} onChange={(e) => setAddress(e.target.value)}/>
                 <Form.Control.Feedback type="invalid">
                   Please provide a Address.
                 </Form.Control.Feedback>
               </Form.Group>
-              <Form.Group as={Col} md="3">
+              <Form.Group as={Col} md="2">
                 <Form.Label>City</Form.Label>
                 <Form.Control type="text" placeholder="City" required value={city} onChange={(e) => setCity(e.target.value)}/>
                 <Form.Control.Feedback type="invalid">
                   Please provide a valid City.
                 </Form.Control.Feedback>
               </Form.Group>
-              <Form.Group as={Col} md="3" >
+              <Form.Group as={Col} md="2" >
                 <Form.Label>State</Form.Label>
                 <Form.Control type="text" placeholder="State" required value={state} onChange={(e) => setState(e.target.value)}/>
                 <Form.Control.Feedback type="invalid">
@@ -292,7 +292,7 @@ const RegistrationForm = () => {
             </Row>
 
             <Row className="mb-3">
-              <Form.Group as={Col} md="6" >
+              <Form.Group as={Col} md="4" >
                 <Form.Label htmlFor="inputPassword5">Password</Form.Label>
                 <Form.Control
                   type="password"
@@ -304,7 +304,7 @@ const RegistrationForm = () => {
                 
               </Form.Group>
 
-              <Form.Group as={Col} md="6" >
+              <Form.Group as={Col} md="4" >
                 <Form.Label htmlFor="inputPassword6">Confirm Password</Form.Label>
                 <Form.Control
                   type="password"
