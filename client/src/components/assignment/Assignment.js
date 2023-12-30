@@ -3,41 +3,61 @@ import { Button, Container, Modal } from "react-bootstrap";
 import AssignList from "./AssignList";
 
 const AssignmentModal = ({ show, onHide }) => {
+  const [employee_id, setemployee_id] = useState([]);
   const [formData, setFormData] = useState({
     task_no: "",
     // employee_id: "",
     task_details: "",
     task_given_by: "",
-    employee: "",
+    employee_id: "",
     assign_date: new Date().toISOString().split("T")[0],
     deadline_date: "",
   });
 
   const [isLoading, setIsLoading] = useState(false);
   const [response, setResponse] = useState(null);
-  const [data, setData] = useState([]);
+  // const [data, setData] = useState([]);
 
   useEffect(() => {
-    // Fetch data from the API
-    const fetchData = async () => {
+    async function fetchCustomerCodes() {
       try {
-        const response = await fetch('http://localhost:5000/user/registrations', {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
+        const response = await fetch(
+          "http://localhost:5000/user/registrations",
+          {
+            headers: {
+              "Content-Type": "application/json",
+              // Add any other headers as needed
+            },
+            credentials: "include",
           },
-          credentials:"include"
-        });
+        );
 
-        const result = await response.json();
-        setData(result);
+        if (response.ok) {
+          const customersData = await response.json();
+
+          const codesAndNames = customersData.map((employee) => ({
+            customerCode: employee.employee_id,
+            customerName: employee.first_name,
+          }));
+
+          // Uncomment the following line if you want to set the state with codesAndNames
+          setemployee_id(codesAndNames);
+        } else {
+          console.error("Error fetching customer data");
+        }
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching customer data:", error);
       }
-    };
+    }
 
-    fetchData();
-  }, []);
+    fetchCustomerCodes();
+  }, []); // The empty dependency array ensures that this effect runs only once on component mount
+
+  const employeeDetails = employee_id.map((customer) => (
+    <option key={customer.customerCode} value={customer.customerCode}>
+      {`${customer.customerCode} - ${customer.customerName}`}
+    </option>
+  ));
 
 
 
@@ -108,10 +128,10 @@ const AssignmentModal = ({ show, onHide }) => {
       setIsLoading(false);
       setFormData({
         task_no: "",
-        employee_id: "",
+        // employee_id: "",
         task_details: "",
         task_given_by: "",
-        employee: "",
+        employee_id: "",
         assign_date: "",
         deadline_date: "",
       });
@@ -147,7 +167,7 @@ const AssignmentModal = ({ show, onHide }) => {
                     name="task_no"
                     value={formData.task_no}
                     onChange={handleInputChange}
-                      // readOnly
+                    // readOnly
                   />
                 </div>
                 {/* <div className="mb-3 col">
@@ -195,24 +215,34 @@ const AssignmentModal = ({ show, onHide }) => {
                   </select>
                 </div>
 
-                <div className="mb-3 col">
-                  <label htmlFor="employee" className="form-label">
+                {/* <div className="mb-3 col">
+                  <label htmlFor="employee_id" className="form-label">
                     Assign To:
                   </label>
 
                   <select
                     className="form-select"
                     aria-label="Default select example"
-                    name="employee"
-                    value={formData.employee}
+                    name="employee_id"
+                    value={formData.employee_id}
                     onChange={handleInputChange}
                   >
-                    <option selected>Please Select</option>
-                    {data.map((item) => (
-                      <option key={item._id}  >
-                        {item.employee_id} - {item.first_name} {item.last_name}
-                      </option>
-                    ))}
+                 
+                  </select>
+                </div> */}
+                <div className="mb-3 col">
+                  <label htmlFor="employee_id" className="form-label">
+                    Assign To:
+                  </label>
+                  <select
+                    className="form-select"
+                    aria-label="Default select example"
+                    name="employee_id"
+                    value={formData.employee_id}
+                    onChange={handleInputChange}
+                  >
+                    {/* Render the customer details options */}
+                    {employeeDetails}
                   </select>
                 </div>
               </div>

@@ -36,6 +36,8 @@ const LoginForm = () => {
       console.log("not open");
     } else {
       console.log("login successful");
+       // Store user data in sessionStorage
+       sessionStorage.setItem('userData', JSON.stringify(data.user));
       // Use navigate to navigate based on user role
       if (data.user.role === "admin") {
         navigate("/"); // Navigate to the admin route
