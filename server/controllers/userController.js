@@ -1,11 +1,12 @@
 // controllers/userController.js
 const User = require('../models/userModel');
 const bcrypt = require('bcrypt');
-
 const jwt = require('jsonwebtoken');
 
-
 const SECRET_KEY = 'miteshpradhanArkaJainUniversity';
+
+
+// business logic for user login 
 
 exports.loginUser = async (req, res) => {
   try {
@@ -38,8 +39,10 @@ exports.loginUser = async (req, res) => {
     console.error(error);
     res.status(500).json({ message: 'Internal server error' });
   }
-}
+};
 
+
+// business logic for user registration 
 
 exports.registerUser = async (req, res) => {
   try {
@@ -77,6 +80,8 @@ exports.registerUser = async (req, res) => {
 };
 
 
+// business logic for getting all users
+
 exports.getAllRegistrations = async (req, res) => {
   try {
     const registrations = await User.find();
@@ -87,6 +92,24 @@ exports.getAllRegistrations = async (req, res) => {
   }
 };
 
+
+// business logic for user logout 
+
+exports.logoutUser = async (req, res) => {
+      
+  try {
+    // Clear the token cookie by setting an expired date
+
+    res.cookie("token", "", { expires: new Date(0), httpOnly: true });
+    res.json({ message: "Logout successful" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+
+// business logic for user logout from all devices 
 
 exports.logoutAllDevices = async (req, res) => {
   try {
@@ -109,19 +132,5 @@ exports.logoutAllDevices = async (req, res) => {
 
     // Send a meaningful error response to the client
     res.status(500).send({ error: "Internal Server Error" });
-  }
-};
-
-
-exports.logoutUser = async (req, res) => {
-      
-  try {
-    // Clear the token cookie by setting an expired date
-
-    res.cookie("token", "", { expires: new Date(0), httpOnly: true });
-    res.json({ message: "Logout successful" });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Internal server error" });
   }
 };

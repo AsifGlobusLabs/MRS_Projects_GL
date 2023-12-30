@@ -24,10 +24,8 @@ app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 // Assign the assignment routes
 app.use('/assignments', assignmentRoutes);
 
-// Assign the login routes
+// Assign the user routes
 app.use('/user', userRoutes);
-
-
 
 // Start the server
 app.listen(PORT, () => {

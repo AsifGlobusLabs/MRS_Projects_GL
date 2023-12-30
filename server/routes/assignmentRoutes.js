@@ -9,7 +9,7 @@ router.post('/', assignmentController.createAssignment);
 router.get('/',auth, assignmentController.getAllAssignments);
 router.get('/assignment-codes', assignmentController.getAssignmentCodes);
 router.get('/latest-assignment-code', assignmentController.getLatestAssignmentCode);
-router.get('/latest-assignment-employeeid', assignmentController.getLatestAssignmentEmployeeId);
+router.get('/latest-assignment-employeeid', assignmentController.getLatestAssignmentByEmployeeId);
 router.get('/:employee_id', assignmentController.getAssignmentDetailsByEmployeeId);
 router.patch('/:id', assignmentController.updateAssignment);
 router.delete('/:id', assignmentController.deleteAssignment);

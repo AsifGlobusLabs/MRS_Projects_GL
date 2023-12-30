@@ -1,6 +1,9 @@
 // controllers/assignmentController.js
 const Assignment = require("../models/assignmentModel");
 
+
+// creating or posting a new assignment 
+
 exports.createAssignment = async (req, res) => {
   try {
     const assignment = new Assignment(req.body);
@@ -12,22 +15,10 @@ exports.createAssignment = async (req, res) => {
 };
 
 
-
-// exports.getAllAssignments = async (req, res) => {
-//   try {
-//     const assignments = await Assignment.find();
-//     res.send(assignments);
-//   } catch (error) {
-//     res.status(500).send(error);
-//   }
-// };
-
-
-
+// getting all assignment 
 
 exports.getAllAssignments = async (req, res) => {
   try {
-    // console.log(req.user.role);
     if (req.user.role === "admin") {
       const assignments = await Assignment.find();
       res.send(assignments);
@@ -43,6 +34,9 @@ exports.getAllAssignments = async (req, res) => {
   }
 };
 
+
+// getting all assignment codes
+
 exports.getAssignmentCodes = async (req, res) => {
   try {
     const codes = await Assignment.find().select("code");
@@ -51,6 +45,9 @@ exports.getAssignmentCodes = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+
+// getting latest assignment codes
 
 exports.getLatestAssignmentCode = async (req, res) => {
   try {
@@ -66,7 +63,10 @@ exports.getLatestAssignmentCode = async (req, res) => {
   }
 };
 
-exports.getLatestAssignmentEmployeeId = async (req, res) => {
+
+// getting latest assignment by employee id
+
+exports.getLatestAssignmentByEmployeeId = async (req, res) => {
   try {
     const latestAssignmentemp = await Assignment.findOne().sort({
       employee_id: -1,
@@ -81,6 +81,9 @@ exports.getLatestAssignmentEmployeeId = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+
+// getting assignment by employee id
 
 exports.getAssignmentDetailsByEmployeeId = async (req, res) => {
   try {
@@ -99,6 +102,9 @@ exports.getAssignmentDetailsByEmployeeId = async (req, res) => {
   }
 };
 
+
+// updating assignment 
+
 exports.updateAssignment = async (req, res) => {
   try {
     const _id = req.params.id;
@@ -113,6 +119,9 @@ exports.updateAssignment = async (req, res) => {
   }
 };
 
+
+// deleting assignment 
+
 exports.deleteAssignment = async (req, res) => {
   try {
     const _id = req.params.id;
@@ -122,6 +131,10 @@ exports.deleteAssignment = async (req, res) => {
     res.status(500).send(error);
   }
 };
+
+
+// changing the status to progress 
+
 exports.progressAssignmentStatus = async (req, res) => {
   const code = req.params.code;
 
@@ -145,6 +158,9 @@ exports.progressAssignmentStatus = async (req, res) => {
   }
 };
 
+
+// changing the status to completed
+
 exports.completeAssignmentStatus = async (req, res) => {
   const code = req.params.code;
 
@@ -155,7 +171,7 @@ exports.completeAssignmentStatus = async (req, res) => {
       return res.status(404).send({ error: "Assignment not found" });
     }
 
-    assignment.status = "completed"; // Assuming 'completed' corresponds to 'status'
+    assignment.status = "completed"; 
     await assignment.save();
 
     res.status(200).json(assignment);
@@ -164,6 +180,9 @@ exports.completeAssignmentStatus = async (req, res) => {
     res.status(500).send({ error: "Internal Server Error" });
   }
 };
+
+
+// getting assignment whose status is progress 
 
 exports.getAssignmentStatus = async (req, res) => {
   try {

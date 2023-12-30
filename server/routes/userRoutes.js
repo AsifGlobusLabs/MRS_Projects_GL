@@ -9,7 +9,6 @@ router.use(express.static('public'));
 
 
 // for saving image using registration form 
-
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
       cb(null, path.join(__dirname,'../public/userImages'))
@@ -18,15 +17,16 @@ const storage = multer.diskStorage({
       const name = Date.now() + '-' + file.originalname;
       cb(null, name)
     }
-  })
-  
-  const upload = multer({ storage: storage });
+})  
+const upload = multer({ storage: storage });
 
 // Login
 router.post('/login', userController.loginUser);
 
-// Registration
+// posting user through registration
 router.post('/register',upload.single('image'), userController.registerUser);
+
+// getting registered users 
 router.get('/registrations', auth, userController.getAllRegistrations);
 
 // Logout from single device
