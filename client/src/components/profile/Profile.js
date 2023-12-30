@@ -23,7 +23,7 @@ const Profile = () => {
       
     if (response.ok) {
       navigate('/auth/login');
-      console.log("logout successful");
+      alert("logout successful");
     }
        else {
        console.log("logout failed");
@@ -42,10 +42,10 @@ const Profile = () => {
 
 <div class="accordion" id="accordionExample" >
 
-<div class="accordion-item "  style={{border:"none", backgroundColor:"#c70101f1"}}>
+<div class="accordion-item "  style={{border:"none", backgroundColor:"#88AB8E"}}>
   <h2 class="accordion-header">
     <button class="collapsed profile-btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo"
-    style={{border:"none", backgroundColor:"#c70101f1"}}
+    style={{border:"none", backgroundColor:"#88AB8E"}}
     >
     <a
     href="/"
@@ -60,7 +60,7 @@ const Profile = () => {
     <div className="p-1 sidebar-position">
       <span>
         <p style={{ fontSize: "18px" }} className="m-0">
-          ASIF ZIA
+          ABC
         </p>
         <p
           style={{ fontSize: "11px", letterSpacing: ".5px" }}
@@ -74,7 +74,7 @@ const Profile = () => {
     </button>
   </h2>
   <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample" >
-    <div class="accordion-body" style={{ backgroundColor:"#c70101f1",  textAlign:"center",  display:"flex", alignItems:"center", justifyContent:"center"}}>
+    <div class="accordion-body" style={{ backgroundColor:"#88AB8E",  textAlign:"center",  display:"flex", alignItems:"center", justifyContent:"center"}}>
       <button 
       style={{border:"none",  borderRadius:"3px", padding:"2px 7px"}}
        onClick={handleLogout}>logout</button>

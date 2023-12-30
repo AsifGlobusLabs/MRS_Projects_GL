@@ -2,7 +2,8 @@ body {
   margin: 0;
   padding: 0;
   /* background-color: #1d2634; */
-  background-color: #fff7cbcb;
+  /* background-color: #fff7cbcb; */
+  background-color: white ;
   color: #9e9ea4;
   font-family: "Montserrat", sans-serif;
 }
@@ -30,7 +31,7 @@ body {
 }
 
 .home {
-  background-image: url("./components/home/homebg.jpg");
+  background-image: url("./components/home/homebg2.jpg");
   background-size: cover;
   opacity: 0.7;
   background-position: center;
@@ -56,6 +57,7 @@ body {
   justify-content: space-between;
   padding: 5px 30px 0 30px;
   box-shadow: 0 6px 7px -3px rgba(0, 0, 0, 0.35);
+  background-color: #F2F1EB;
 }
 
 .menu-icon {
@@ -118,14 +120,17 @@ body {
 /* register form  */
 .register-header {
   height: 65px;
-  background-color: #c70101f1;
+  background-color: #88AB8E;
   margin: 0;
   display: flex;
   align-items: center;
 }
 
 .register-container {
-  background-color: #fff7cbcb;
+  /* background-color: white; */
+  background-image: url("./components/registration/registerbg3.png");
+  background-size: cover;
+background-position: center;
   /* height: 90vh; */
   /* background-color: yellow; */
 }
@@ -151,8 +156,6 @@ body {
   width: 100%;
   height: 60vh;
   /* margin: 10px; */
-  background-image: url("./components/registration/registerImg.jpg");
-  background-size: cover;
 }
 
 .left-register {
@@ -179,18 +182,19 @@ body {
 }
 
 .login-left {
-  height: auto;
-  width: 35%;
-  padding: 20px;
-}
-
-.login-right {
+ 
   width: 45%;
   height: 60vh;
-  background-image: url("./components/login/loginbg.jpg");
+  background-image: url("./components/login/loginpage.jpg");
   background-size: cover;
   background-position: center;
   margin: 20px;
+}
+
+.login-right {
+  height: auto;
+  width: 35%;
+  padding: 20px;
 }
 
 .dropdown-menu button {
@@ -210,7 +214,7 @@ body {
   width: 70px;
   height: 100%;
   color: white;
-  background-color: #c70101f1;
+  background-color: #88AB8E;
   transition: width 0.3s ease;
   padding-top: 15px;
 }
@@ -230,7 +234,7 @@ body {
 }
 
 .sidebar .sidebar-position:hover {
-  background-color: #850000;
+  background-color: #1B4242;
   width: 100%;
 }
 
@@ -389,3 +393,10 @@ width: 100%;
 /* End Sidebar  */
 
 
+.overflow-cell {
+  max-height: 60px;
+  max-width: 250px;
+  overflow: auto; /* or auto, scroll, etc. based on your requirements */
+  white-space: nowrap; 
+  /* text-overflow:ellipsis; */
+}

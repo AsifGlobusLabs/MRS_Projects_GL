@@ -46,6 +46,8 @@ const LoginForm = () => {
   } catch (error) {
     setError('Invalid email or password');
     console.error(error);
+    alert("Invalid email or password")
+    window.location.reload(false);
   }
 
 
@@ -94,8 +96,8 @@ const LoginForm = () => {
       </div>
  
       <div className="login-section">
-
-     <div className="login-left">
+      <div className="login-left"></div>
+     <div className="login-right">
   
 <form>
   <div class="row mb-4">
@@ -122,7 +124,7 @@ const LoginForm = () => {
 
 
       </div>
-      <div className="login-right"></div>
+      
       </div>
     </div>
   );
