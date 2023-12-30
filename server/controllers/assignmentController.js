@@ -51,13 +51,13 @@ exports.getAssignmentCodes = async (req, res) => {
 
 exports.getLatestAssignmentCode = async (req, res) => {
   try {
-    const latestAssignment = await Assignment.findOne().sort({ code: -1 });
+    const latestAssignment = await Assignment.findOne().sort({ task_no: -1 });
 
     if (!latestAssignment) {
       return res.status(404).json({ message: "No assignments found" });
     }
 
-    res.json({ code: latestAssignment.code });
+    res.json({ task_no: latestAssignment.task_no });
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -136,10 +136,10 @@ exports.deleteAssignment = async (req, res) => {
 // changing the status to progress 
 
 exports.progressAssignmentStatus = async (req, res) => {
-  const code = req.params.code;
+  const task_no = req.params.task_no;
 
   try {
-    const assignment = await Assignment.findOne({ code: code });
+    const assignment = await Assignment.findOne({ task_no: task_no });
 
     if (!assignment) {
       return res.status(404).json({ error: "Assignment not found" });
@@ -148,7 +148,7 @@ exports.progressAssignmentStatus = async (req, res) => {
     // Validate the progress value further if needed
     // Add business logic validation here...
 
-    assignment.status = "progress";
+    assignment.status = "Progress";
     await assignment.save();
 
     res.status(200).json(assignment);
@@ -159,19 +159,19 @@ exports.progressAssignmentStatus = async (req, res) => {
 };
 
 
-// changing the status to completed
+// changing the status to Completed
 
 exports.completeAssignmentStatus = async (req, res) => {
-  const code = req.params.code;
+  const task_no = req.params.task_no;
 
   try {
-    const assignment = await Assignment.findOne({ code: code });
+    const assignment = await Assignment.findOne({ task_no: task_no });
 
     if (!assignment) {
       return res.status(404).send({ error: "Assignment not found" });
     }
 
-    assignment.status = "completed"; 
+    assignment.status = "Completed"; 
     await assignment.save();
 
     res.status(200).json(assignment);
@@ -182,18 +182,18 @@ exports.completeAssignmentStatus = async (req, res) => {
 };
 
 
-// getting assignment whose status is progress 
+// getting assignment whose status is Progress 
 
 exports.getAssignmentStatus = async (req, res) => {
   try {
     if (req.user.role === "admin") {
-      const status = await Assignment.find({ status: "progress" });
+      const status = await Assignment.find({ status: "Progress" });
       res.send(status);
     } else {
       employee_id = req.user.employee_id;
       const status = await Assignment.find({
         employee_id: employee_id,
-        status: "progress",
+        status: "Progress",
       });
       res.send(status);
     }

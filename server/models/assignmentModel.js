@@ -29,8 +29,8 @@ const assignmentSchema = new mongoose.Schema({
   },
   status: {
     type: String,
-    enum: ['pending', 'completed', 'progress'],
-    default: 'pending',
+    enum: ['Pending', 'Completed', 'Progress'],
+    default: 'Pending',
     required: true,
   }
 });
