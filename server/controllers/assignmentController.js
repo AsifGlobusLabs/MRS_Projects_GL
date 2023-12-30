@@ -31,7 +31,7 @@ exports.getAllAssignments = async (req, res) => {
     if (req.user.role === "admin") {
       const assignments = await Assignment.find();
       res.send(assignments);
-    }else{
+    } else {
       employee_id = req.user.employee_id;
       const assignments = await Assignment.find({
         employee_id: employee_id,
@@ -182,3 +182,5 @@ exports.getAssignmentStatus = async (req, res) => {
     res.status(500).json({ message: error.message });
   }
 };
+
+
