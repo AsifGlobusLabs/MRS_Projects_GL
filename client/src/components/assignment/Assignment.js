@@ -8,7 +8,7 @@ const AssignmentModal = ({ show, onHide }) => {
     // employee_id: "",
     task_details: "",
     task_given_by: "",
-    employee: "",
+    employee_id: "",
     assign_date: new Date().toISOString().split("T")[0],
     deadline_date: "",
   });
@@ -108,10 +108,10 @@ const AssignmentModal = ({ show, onHide }) => {
       setIsLoading(false);
       setFormData({
         task_no: "",
-        employee_id: "",
+        // employee_id: "",
         task_details: "",
         task_given_by: "",
-        employee: "",
+        employee_id: "",
         assign_date: "",
         deadline_date: "",
       });
@@ -196,15 +196,15 @@ const AssignmentModal = ({ show, onHide }) => {
                 </div>
 
                 <div className="mb-3 col">
-                  <label htmlFor="employee" className="form-label">
+                  <label htmlFor="employee_id" className="form-label">
                     Assign To:
                   </label>
 
                   <select
                     className="form-select"
                     aria-label="Default select example"
-                    name="employee"
-                    value={formData.employee}
+                    name="employee_id"
+                    value={formData.employee_id}
                     onChange={handleInputChange}
                   >
                     <option selected>Please Select</option>

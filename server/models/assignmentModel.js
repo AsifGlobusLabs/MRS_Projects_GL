@@ -15,7 +15,7 @@ const assignmentSchema = new mongoose.Schema({
     type : String,
     required : true
   },
-  employee: {
+  employee_id: {
     type : String,
     required : true
   },

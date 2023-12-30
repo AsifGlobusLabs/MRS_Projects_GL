@@ -197,7 +197,7 @@ const AssignList = () => {
               {/* <td>{item.employee_id}</td> */}
               <td className="overflow-cell">{item.task_details}</td>
               <td>{item.task_given_by}</td>
-              <td>{item.employee}</td>
+              <td>{item.employee_id}</td>
               <td>{moment(item.assign_date).format("DD/MM/YYYY")}</td>
               <td>{moment(item.deadline_date).format("DD/MM/YYYY")}</td>
               {/* <td>{item.status}</td> */}
