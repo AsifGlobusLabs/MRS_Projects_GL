@@ -139,6 +139,8 @@ exports.progressAssignmentStatus = async (req, res) => {
   const task_no = req.params.task_no;
 
   try {
+    console.log(req.user.role);
+    if(req.user.role === "user"){
     const assignment = await Assignment.findOne({ task_no: task_no });
 
     if (!assignment) {
@@ -152,7 +154,8 @@ exports.progressAssignmentStatus = async (req, res) => {
     await assignment.save();
 
     res.status(200).json(assignment);
-  } catch (error) {
+  }
+} catch (error) {
     console.error(error);
     res.status(500).json({ error: "Internal Server Error" });
   }
