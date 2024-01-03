@@ -61,6 +61,7 @@ const AssignList = () => {
   };
 
   // -----------filter data-------
+
   // const filterData = async (employee_id) => {
   //   try {
   //     const apiUrl = `http://localhost:5000/assignments/${employee_id}`;
@@ -78,6 +79,7 @@ const AssignList = () => {
   //     console.error("Error fetching filtered data:", error);
   //   }
   // };
+
 
   // ------------add to task-----------
   const handleAddToTask = async (task_no) => {
@@ -165,20 +167,16 @@ const AssignList = () => {
   //   }
   // };
 
+
   return (
     <div>
-      
-
-      {/* <button onClick={() => filterData("")}>All Data</button>
-      <button onClick={() => filterData("GL001")}>Employee ID GL001</button>
-      <button onClick={() => filterData("GL002")}>Employee ID GL002</button> */}
-
+ 
       <table className="table table-striped">
         <thead style={{ fontSize: "15px" }}>
           <tr>
             <th>Task No.</th>
             {/* <th>Employee Id</th> */}
-            <th>Assignment</th>
+            <th>Task Details</th>
             <th>Task given by</th>
             <th>Assign To</th>
             <th>Assign Date</th>
@@ -202,7 +200,7 @@ const AssignList = () => {
               <td>{moment(item.deadline_date).format("DD/MM/YYYY")}</td>
               {/* <td>{item.status}</td> */}
 
-              <td style={{ textAlign: "center" }}>
+              <td>
                 {item.status === "Progress" ? (
                   <span style={{ color: "orange" }}>{item.status}</span>
                 ) : item.status === "Pending" ? (

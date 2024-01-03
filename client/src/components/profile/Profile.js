@@ -67,7 +67,7 @@ const Profile = () => {
               <div className="p-1 sidebar-position">
                 <span>
                   <p style={{ fontSize: "18px" }} className="m-0">
-                    {userData.first_name}
+                    {userData.first_name} {userData.last_name}
                   </p>
                   <p
                     style={{ fontSize: "11px", letterSpacing: ".5px" }}
