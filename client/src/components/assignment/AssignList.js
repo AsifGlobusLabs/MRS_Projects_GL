@@ -114,64 +114,12 @@ const AssignList = () => {
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
   
 
-  // const renderAddIcon = (item) => {
-  //   if (item.status === "pending") {
-  //     console.log(item,"status");
-  //     if ( item.role === "user"){
-  //       console.log(item.role, "user");
-  //     return (
-  //       <i
-  //         className="fa-solid fa-square-plus"
-  //         style={{
-  //           cursor: "pointer",
-  //           color: "#0084ff",
-  //           fontSize: "20px",
-  //         }}
-  //         onClick={() => handleAddToTask(item.code)}
-  //       ></i>
-  //     )} else {
-  //       return(
-  //         <i
-  //         className="fa-solid fa-hourglass-half"
-  //         style={{
-  //           color: "orange",
-  //           fontSize: "20px",
-  //         }}
-  //       ></i>
-  //       )
-  //      }
-  //   } 
-
-  //  else if (item.status === "progress") {
-  //     return (
-  //       <i
-  //         className="fa-solid fa-spinner"
-  //         style={{
-  //           color: "orange",
-  //           fontSize: "20px",
-  //         }}
-  //       ></i>
-  //     );
-  //   } else {
-  //     return (
-  //       <i
-  //         className="fa-solid fa-circle-check"
-  //         style={{
-  //           color: "green",
-  //           fontSize: "20px",
-  //         }}
-  //       ></i>
-  //     );
-  //   }
-  // };
-
+ 
   return (
     <div>
       
 
-      {/* <button onClick={() => filterData("")}>All Data</button>
-      <button onClick={() => filterData("GL001")}>Employee ID GL001</button>
-      <button onClick={() => filterData("GL002")}>Employee ID GL002</button> */}
+    
 
       <table className="table table-striped">
         <thead style={{ fontSize: "15px" }}>

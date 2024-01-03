@@ -215,21 +215,10 @@ const AssignmentModal = ({ show, onHide }) => {
                   </select>
                 </div>
 
-                <div className="mb-3 col">
-                  <label htmlFor="employee_id" className="form-label">
-                    Assign To:
-                  </label>
+          
 
-                  <select
-                    className="form-select"
-                    aria-label="Default select example"
-                    name="employee_id"
-                    value={formData.employee_id}
-                    onChange={handleInputChange}
-                  >
-                 
-                  </select>
-                </div> 
+
+
                 <div className="mb-3 col">
                   <label htmlFor="employee_id" className="form-label">
                     Assign To:
