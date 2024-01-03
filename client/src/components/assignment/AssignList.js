@@ -90,6 +90,7 @@ const AssignList = () => {
         headers: {
           "Content-Type": "application/json",
         },
+        credentials: "include",
         // You can add a request body if needed
         // body: JSON.stringify({ key: 'value' }),
       });
