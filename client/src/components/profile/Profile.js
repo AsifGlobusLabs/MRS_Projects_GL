@@ -56,21 +56,21 @@ const Profile = () => {
           >
             <a
               href="/"
-              style={{ textDecoration: "none", color: "#fff" }}
+              style={{ textDecoration: "none", background:"#B6C4B6" }}
               className="sidebar-position"
             >
               <img
                 src={usericon}
                 alt="usericon"
-                style={{ height: "45px", marginRight: "5px" }}
+                style={{ height: "45px", marginRight: "2px" }}
               />
-              <div className="p-1 sidebar-position">
+              <div className="p-1 sidebar-position1">
                 <span>
-                  <p style={{ fontSize: "18px" }} className="m-0">
+                  <p style={{ fontSize: "15px", color:"#163020" }} className="m-0">
                     {userData.first_name} {userData.last_name}
                   </p>
                   <p
-                    style={{ fontSize: "11px", letterSpacing: ".5px" }}
+                    style={{ fontSize: "10px", letterSpacing: ".5px", color:"#163020" }}
                     className="m-0"
                   >
                     {userData.position}

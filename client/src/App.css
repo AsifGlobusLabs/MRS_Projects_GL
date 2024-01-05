@@ -162,6 +162,7 @@ background-position: center;
   width: 60%;
   height: auto;
   padding: 10px;
+
 }
 
 .rounded-t-5 {
@@ -169,23 +170,38 @@ background-position: center;
   border-bottom-left-radius: 0.5rem;
 }
 
-.login-section {
+/* --login-- */
+
+.login-container{
   width: 100vw;
-  height: 85vh;
+  height: 88vh;
+ 
+  padding: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
-  /* background-color: rgb(255, 185, 185); */
-  /* background-image: url('./components/registration/login-bg.avif'); */
+}
+
+.login-section {
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   background-size: cover;
   padding: 20px;
+  background-color: aliceblue;
+  /* border: 1px solid rgba(128, 128, 128, 0.623); */
+  box-shadow: 1px 2px 15px rgba(128, 128, 128, 0.575);
 }
+
+
 
 .login-left {
  
-  width: 45%;
-  height: 60vh;
-  background-image: url("./components/login/loginpage.jpg");
+  width: 50%;
+  height: auto;
+  /* background-image: url("./components/login/loginpage.jpg"); */
   background-size: cover;
   background-position: center;
   margin: 20px;
@@ -236,6 +252,9 @@ background-position: center;
 .sidebar .sidebar-position:hover {
   background-color: #1B4242;
   width: 100%;
+}
+.sidebar .sidebar-position1:hover {
+width: auto;
 }
 
 .sidebar span {
