@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
+import EditAssignmentModal from './EditAssignmentModal';
 
 const AssignList = () => {
   const navigate = useNavigate();
@@ -10,6 +11,27 @@ const AssignList = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(50);
+
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [selectedItemId, setSelectedItemId] = useState(null);
+
+
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -60,26 +82,18 @@ const AssignList = () => {
     }
   };
 
-  // -----------filter data-------
-  // const filterData = async (employee_id) => {
-  //   try {
-  //     const apiUrl = `http://localhost:5000/assignments/${employee_id}`;
-  //     const response = await fetch(apiUrl);
-  //     const result = await response.json();
-  //     // console.log( result, "test2")
-  //     if (Array.isArray(result)) {
-  //       setFilteredData(result);
-  //       // console.log( result, "test1")
-  //     } else {
-  //       setFilteredData([result]);
-  //       // console.log( result, "test3")
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching filtered data:", error);
-  //   }
-  // };
 
-  // ------------add to task-----------
+// edit assignment List
+  const handleEditTask = (_id) => {
+    // Your delete logic...
+
+    // Show the edit modal when delete is clicked
+   
+    setShowEditModal(true);
+    setSelectedItemId(_id);
+  };
+
+
   const handleAddToTask = async (task_no) => {
     try {
       const apiUrl = `http://localhost:5000/assignments/${task_no}/progress`;
@@ -95,7 +109,7 @@ const AssignList = () => {
 
       if (response.ok) {
         // Handle success, maybe update the UI or perform additional actions
-        console.log("Task added successfully");
+    
         alert("Data Add to Task");
         navigate("/task");
       } else {
@@ -106,6 +120,8 @@ const AssignList = () => {
     }
   };
 
+
+
   // Calculate the index range for the current page
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -113,21 +129,15 @@ const AssignList = () => {
 
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  
 
- 
   return (
     <div>
-      
-
-    
-
       <table className="table table-striped">
         <thead style={{ fontSize: "15px" }}>
           <tr>
             <th>Task No.</th>
             {/* <th>Employee Id</th> */}
-            <th>Assignment</th>
+            <th>Task Details</th>
             <th>Task given by</th>
             <th>Assign To</th>
             <th>Assign Date</th>
@@ -151,7 +161,7 @@ const AssignList = () => {
               <td>{moment(item.deadline_date).format("DD/MM/YYYY")}</td>
               {/* <td>{item.status}</td> */}
 
-              <td style={{ textAlign: "center" }}>
+              <td>
                 {item.status === "Progress" ? (
                   <span style={{ color: "orange" }}>{item.status}</span>
                 ) : item.status === "Pending" ? (
@@ -169,8 +179,11 @@ const AssignList = () => {
                     color: "#045e83",
                     fontSize: "16px",
                   }}
+                  onClick={() =>handleEditTask(item._id)}
+                
                 ></i>
               </td>
+
               <td style={{ textAlign: "center" }}>
                 <i
                   className="fa-solid fa-trash-can"
@@ -209,12 +222,20 @@ const AssignList = () => {
                 )}
               </td>
 
-
               {/* <td style={{ textAlign: "center" }}> {renderAddIcon(item)}</td> */}
             </tr>
           ))}
         </tbody>
       </table>
+
+      {/* Edit Assignment Modal */}
+      <EditAssignmentModal
+        show={showEditModal}
+        onClose={() => setShowEditModal(false)}
+        itemId={selectedItemId}
+      />
+
+
       {/* Pagination */}
       <ul className="pagination">
         {Array.from(

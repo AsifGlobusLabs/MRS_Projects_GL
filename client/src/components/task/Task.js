@@ -73,7 +73,7 @@ const Task = () => {
           <tr>
             <th>Code</th>
             {/* <th>Employee Id</th> */}
-            <th>Assignment</th>
+            <th>Task Details</th>
             <th>Task given by</th>
             <th>Assign To</th>
             <th>Assign Date</th>

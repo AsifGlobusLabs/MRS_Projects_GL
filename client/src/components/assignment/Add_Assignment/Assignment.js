@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Container, Modal } from "react-bootstrap";
-import AssignList from "./AssignList";
+import AssignList from "../AssgnmentList/AssignList"
 
 const AssignmentModal = ({ show, onHide }) => {
   const [employee_id, setemployee_id] = useState([]);
@@ -69,8 +69,8 @@ const AssignmentModal = ({ show, onHide }) => {
           "http://localhost:5000/assignments/latest-assignment-code",
         );
         const newCodeNumber = incrementCodeNumber(latestCodeNumber);
-        console.log(newCodeNumber);
-        setFormData((prevData) => ({ ...prevData, task_no: newCodeNumber }));
+        
+        setFormData((prevData) => ({ ...prevData, task_no: newCodeNumber, task_given_by: userData.first_name, }));
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -78,6 +78,7 @@ const AssignmentModal = ({ show, onHide }) => {
 
     fetchData();
   }, []);
+
 
   const fetchLatestCodeNumber = async (apiUrl) => {
     try {
@@ -138,6 +139,10 @@ const AssignmentModal = ({ show, onHide }) => {
     }
     window.location.reload(false);
   };
+
+  const userData = JSON.parse(sessionStorage.getItem("userData"));
+ 
+
 
   return (
     <Modal
@@ -202,23 +207,15 @@ const AssignmentModal = ({ show, onHide }) => {
                   <label htmlFor="task_given_by" className="form-label">
                     From:
                   </label>
-                  <select
-                    className="form-select"
+                  <input
+                    className="form-control"
                     aria-label="Default select example"
                     name="task_given_by"
+                    // value={userData.first_name}
                     value={formData.task_given_by}
                     onChange={handleInputChange}
-                  >
-                    <option selected>Please Select</option>
-                    <option>Azhar sir</option>
-                    <option>Mitesh sir</option>
-                  </select>
-                </div>
-
-          
-
-
-
+                  />
+             </div>
                 <div className="mb-3 col">
                   <label htmlFor="employee_id" className="form-label">
                     Assign To:
@@ -230,6 +227,7 @@ const AssignmentModal = ({ show, onHide }) => {
                     value={formData.employee_id}
                     onChange={handleInputChange}
                   >
+                     <option selected>Please Select</option>
                     {/* Render the customer details options */}
                     {employeeDetails}
                   </select>
