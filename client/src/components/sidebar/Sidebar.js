@@ -15,7 +15,7 @@ import Profile from "../profile/Profile";
 
 function Sidebar() {
   const [isOpen, setIsOpen] = useState(true);
-  const handleTrigger = () => setIsOpen(!isOpen);
+  // const handleTrigger = () => setIsOpen(!isOpen);
 
   return (
     <div
@@ -23,8 +23,8 @@ function Sidebar() {
       // className={openSidebarToggle ? "sidebar-responsive" : ""}
       className={`sidebar ${isOpen ? "sidebar--open" : ""}`}
     >
-      <div className="trigger" onClick={handleTrigger}>
-        <FontAwesomeIcon icon={isOpen ? faBars : faTimes} />
+      <div className="trigger">
+        <FontAwesomeIcon icon={isOpen ? "" : faTimes} />
       </div>
 
       <Link

@@ -110,7 +110,12 @@ const LoginForm = () => {
       </div>
 
       <div className="login-container">
+        
         <div className="login-section">
+        <div>
+          <h3>SIGN-IN</h3>
+        </div>
+        <div className="login-section1">
           <div className="login-left">
             <img
               src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-login-form/draw2.webp"
@@ -171,6 +176,7 @@ const LoginForm = () => {
               </button>
             </MDBContainer>
           </div>
+        </div>
         </div>
       </div>
     </div>

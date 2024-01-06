@@ -113,3 +113,144 @@ const Profile = () => {
 };
 
 export default Profile;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import Modal from 'react-bootstrap/Modal';
+// import { Container } from "react-bootstrap";
+
+
+// function MyVerticallyCenteredModal({ show, onHide }) {
+  
+//   return (
+//     <Modal
+//       show={show}
+//       onHide={onHide}
+//       aria-labelledby="contained-modal-title-vcenter"
+//       size="xl"
+//     >
+//       <Modal.Header closeButton>
+//         <Modal.Title id="contained-modal-title-vcenter">
+//           Edit Assignment
+//         </Modal.Title>
+//       </Modal.Header>
+//       <Modal.Body className="grid-example">
+//         <Container>
+//           <form >
+//             <div className="container">
+//               <div className="row">
+//                 <div className="mb-3 col-2">
+//                   <label htmlFor="task_no" className="form-label">
+//                     Task Number:
+//                   </label>
+//                   <input
+//                     type="text"
+//                     className="form-control"
+//                     placeholder="Enter Task No."
+//                     name="task_no"
+                    
+//                   />
+//                 </div>
+              
+//               </div>
+//               <div className="mb-3 col">
+//                 <label htmlFor="task_details" className="form-label">
+//                   Task Details:
+//                 </label>
+//                 <textarea
+//                   type="text"
+//                   className="form-control"
+//                   id="assignment"
+//                   placeholder="Write Something...."
+//                   name="task_details"
+                
+//                 />
+//               </div>
+
+//               <div className="row">
+//                 <div className="mb-3 col">
+//                   <label htmlFor="task_given_by" className="form-label">
+//                     From:
+//                   </label>
+//                   <input
+//                     className="form-control"
+//                     aria-label="Default select example"
+//                     name="task_given_by"
+                
+//                   />
+//              </div>
+
+//                 <div className="mb-3 col">
+//                   <label htmlFor="employee_id" className="form-label">
+//                     Assign To:
+//                   </label>
+                 
+//                   <select
+//                     className="form-select"
+//                     aria-label="Default select example"
+//                     name="employee_id"
+                 
+//                   >
+//                      <option selected>Please Select</option>
+//                     {/* Render the customer details options */}
+               
+//                   </select>
+//                 </div>
+//               </div>
+
+//               <div className="row">
+//                 <div className="mb-3 col">
+//                   <label htmlFor="assign_date" className="form-label">
+//                     Given Date:
+//                   </label>
+
+//                   <input
+//                     type="date"
+//                     className="form-control"
+//                     name="assign_date"
+                  
+//                   />
+//                 </div>
+//                 <div className="mb-3 col">
+//                   <label htmlFor="deadline_date" className="form-label">
+//                     Deadline date:
+//                   </label>
+//                   <input
+//                     type="date"
+//                     className="form-control"
+//                     name="deadline_date"
+                   
+//                   />
+//                 </div>
+//               </div>
+//               <div style={{ display: "flex", justifyContent: "flex-end" }}>
+//                 <button
+//                   type="submit"
+//                   className="btn btn-primary"
+             
+//                 >
+//             submit
+//                 </button>
+//               </div>
+//             </div>
+//           </form>
+       
+//         </Container>
+//       </Modal.Body>
+//     </Modal>
+//   );
+// }
