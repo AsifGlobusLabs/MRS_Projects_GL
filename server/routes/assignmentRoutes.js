@@ -6,9 +6,9 @@ const assignmentController = require('../controllers/assignmentController');
 
 router.post('/', assignmentController.createAssignment);
 router.get('/',auth, assignmentController.getAllAssignments);
+router.get('/latest-assignment-code', assignmentController.getLatestAssignmentCode);
 router.get('/:id', assignmentController.getAssignmentDetailsById);
 router.get('/assignment-codes', assignmentController.getAssignmentCodes);
-router.get('/latest-assignment-code', assignmentController.getLatestAssignmentCode);
 router.get('/latest-assignment-employeeid', assignmentController.getLatestAssignmentByEmployeeId);
 router.get('/:employee_id', assignmentController.getAssignmentDetailsByEmployeeId);
 router.patch('/:id', assignmentController.updateAssignment);

@@ -205,22 +205,22 @@ exports.completeAssignmentStatus = async (req, res) => {
 
 // getting assignment whose status is Progress 
 
-// exports.getAssignmentStatus = async (req, res) => {
-//   try {
-//     if (req.user.role === "admin") {
-//       const status = await Assignment.find({ status: "Progress" });
-//       res.send(status);
-//     } else {
-//       employee_id = req.user.employee_id;
-//       const status = await Assignment.find({
-//         employee_id: employee_id,
-//         status: "Progress",
-//       });
-//       res.send(status);
-//     }
-//   } catch (error) {
-//     res.status(500).json({ message: error.message });
-//   }
-// };
+exports.getAssignmentStatus = async (req, res) => {
+  try {
+    if (req.user.role === "admin") {
+      const status = await Assignment.find({ status: "Progress" });
+      res.send(status);
+    } else {
+      employee_id = req.user.employee_id;
+      const status = await Assignment.find({
+        employee_id: employee_id,
+        status: "Progress",
+      });
+      res.send(status);
+    }
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
 
 
