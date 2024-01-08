@@ -37,14 +37,14 @@ exports.getAllAssignments = async (req, res) => {
 
 // getting all assignment codes
 
-exports.getAssignmentCodes = async (req, res) => {
-  try {
-    const codes = await Assignment.find().select("code");
-    res.json(codes);
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+// exports.getAssignmentCodes = async (req, res) => {
+//   try {
+//     const codes = await Assignment.find().select("code");
+//     res.json(codes);
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// };
 
 
 // getting latest assignment codes
@@ -164,10 +164,6 @@ exports.progressAssignmentStatus = async (req, res) => {
     if (!assignment) {
       return res.status(404).json({ error: "Assignment not found" });
     }
-
-    // Validate the progress value further if needed
-    // Add business logic validation here...
-
     assignment.status = "Progress";
     await assignment.save();
 
@@ -210,6 +206,21 @@ exports.getAssignmentStatus = async (req, res) => {
       const status = await Assignment.find({
         employee_id: employee_id,
         status: "Progress",
+      });
+      res.send(status);
+    }catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+// getting assignment whose status is Completed 
+
+exports.getAssignmentStatus = async (req, res) => {
+  try {
+      employee_id = req.user.employee_id;
+      const status = await Assignment.find({
+        employee_id: employee_id,
+        status: "Complete",
       });
       res.send(status);
     }catch (error) {
