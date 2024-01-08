@@ -103,6 +103,25 @@ exports.getAssignmentDetailsByEmployeeId = async (req, res) => {
 };
 
 
+// getting assignment by id
+
+exports.getAssignmentDetailsById = async (req, res) => {
+  try {
+    const _id = req.params.id;
+    const assignmentDetails = await Assignment.findOne({_id: _id});
+
+    if (!assignmentDetails) {
+      return res.status(404).send();
+    } else {
+      res.send(assignmentDetails);
+    }
+  } catch (e) {
+    console.error(e);
+    res.status(500).send(e);
+  }
+}
+
+
 // updating assignment 
 
 exports.updateAssignment = async (req, res) => {
@@ -187,22 +206,22 @@ exports.completeAssignmentStatus = async (req, res) => {
 
 // getting assignment whose status is Progress 
 
-exports.getAssignmentStatus = async (req, res) => {
-  try {
-    if (req.user.role === "admin") {
-      const status = await Assignment.find({ status: "Progress" });
-      res.send(status);
-    } else {
-      employee_id = req.user.employee_id;
-      const status = await Assignment.find({
-        employee_id: employee_id,
-        status: "Progress",
-      });
-      res.send(status);
-    }
-  } catch (error) {
-    res.status(500).json({ message: error.message });
-  }
-};
+// exports.getAssignmentStatus = async (req, res) => {
+//   try {
+//     if (req.user.role === "admin") {
+//       const status = await Assignment.find({ status: "Progress" });
+//       res.send(status);
+//     } else {
+//       employee_id = req.user.employee_id;
+//       const status = await Assignment.find({
+//         employee_id: employee_id,
+//         status: "Progress",
+//       });
+//       res.send(status);
+//     }
+//   } catch (error) {
+//     res.status(500).json({ message: error.message });
+//   }
+// };
 
 
