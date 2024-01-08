@@ -13,8 +13,8 @@ router.get('/latest-assignment-employeeid', assignmentController.getLatestAssign
 router.get('/:employee_id', assignmentController.getAssignmentDetailsByEmployeeId);
 router.patch('/:id', assignmentController.updateAssignment);
 router.delete('/:id', assignmentController.deleteAssignment);
-router.get('/status/progress',auth, assignmentController.getAssignmentStatus);
-router.get('/status/completed',auth, assignmentController.getAssignmentStatus);
+router.get('/status/progress',auth, assignmentController.getProgressStatusAssignment);
+router.get('/status/completed',auth, assignmentController.getCompletedStatusAssignment);
 router.patch('/:task_no/progress',auth, assignmentController.progressAssignmentStatus);
 router.patch('/:task_no/completed', assignmentController.completeAssignmentStatus);
 // router.get('/status', assignmentController.getAssignmentStatus);

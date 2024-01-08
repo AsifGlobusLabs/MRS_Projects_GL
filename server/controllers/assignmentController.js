@@ -200,7 +200,7 @@ exports.completeAssignmentStatus = async (req, res) => {
 
 // getting assignment whose status is Progress 
 
-exports.getAssignmentStatus = async (req, res) => {
+exports.getProgressStatusAssignment = async (req, res) => {
   try {
       employee_id = req.user.employee_id;
       const status = await Assignment.find({
@@ -215,7 +215,7 @@ exports.getAssignmentStatus = async (req, res) => {
 
 // getting assignment whose status is Completed 
 
-exports.getAssignmentStatus = async (req, res) => {
+exports.getCompletedStatusAssignment = async (req, res) => {
   try {
       employee_id = req.user.employee_id;
       const status = await Assignment.find({
