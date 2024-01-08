@@ -46,25 +46,34 @@ const AssignList = () => {
   }, []);
 
   // ------------delete btn------------
-  const handleDelete = async (_id) => {
-    try {
-      const apiUrl = `http://localhost:5000/assignments/${_id}`;
-      const response = await fetch(apiUrl, {
-        method: "DELETE",
-      });
+// delete btn
+const handleDelete = async (_id) => {
+  // Display a confirmation dialog
+  const confirmDelete = window.confirm("Are you sure you want to delete this item?");
 
-      if (response.ok) {
-        setData((prevData) => prevData.filter((item) => item._id !== _id));
-        setFilteredData((prevData) =>
-          prevData.filter((item) => item._id !== _id),
-        );
-      } else {
-        console.error("Error deleting item:", response.status);
-      }
-    } catch (error) {
-      console.error("Error deleting item:", error);
+  if (!confirmDelete) {
+    // If the user clicks "Cancel" in the confirmation dialog, do nothing
+    return;
+  }
+
+  try {
+    const apiUrl = `http://localhost:5000/assignments/${_id}`;
+    const response = await fetch(apiUrl, {
+      method: "DELETE",
+    });
+
+    if (response.ok) {
+      // Remove the deleted item from both data and filteredData arrays
+      setData((prevData) => prevData.filter((item) => item._id !== _id));
+      setFilteredData((prevData) => prevData.filter((item) => item._id !== _id));
+    } else {
+      console.error("Error deleting item:", response.status);
     }
-  };
+  } catch (error) {
+    console.error("Error deleting item:", error);
+  }
+};
+
 
   // edit assignment List
   const handleEditTask = (_id) => {
@@ -110,6 +119,8 @@ const AssignList = () => {
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
+  const userData = JSON.parse(sessionStorage.getItem("userData"));
+
   return (
     <div>
       <table className="table table-striped">
@@ -153,7 +164,8 @@ const AssignList = () => {
 
               {/* --------edit-------- */}
               <td style={{ textAlign: "center" }}>
-                <i
+                {userData.role==="admin" ? (
+                  <i
                   // onClick={() => handleEdit()}
                   className="fa-solid fa-pen-to-square"
                   style={{
@@ -163,6 +175,13 @@ const AssignList = () => {
                   }}
                   onClick={() => handleEditTask(item._id)}
                 ></i>
+                ):(
+                  <i class="fa-solid fa-square-xmark" style={{
+                    color: "#045e83",
+                    fontSize: "17px",
+                  }}></i>
+                )}
+                
               </td>
 
               <td style={{ textAlign: "center" }}>

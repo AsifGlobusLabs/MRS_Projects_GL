@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 
-
 import {
   BsGrid1X2Fill,
   BsFillArchiveFill,
   BsPeopleFill,
   BsFillGearFill,
-  BsArrowRightSquareFill 
+  BsArrowRightSquareFill,
 } from "react-icons/bs";
 import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -27,13 +26,9 @@ function Sidebar() {
         <FontAwesomeIcon icon={isOpen ? "" : faTimes} />
       </div>
 
-      <Link
-        to={"/"}
-        style={{ textDecoration: "none", color: "#fff" }}
-      >
-         <Profile/>
+      <Link to={"/"} style={{ textDecoration: "none", color: "#fff" }}>
+        <Profile />
       </Link>
-     
 
       {/* <a
         href="/"
@@ -107,7 +102,14 @@ function Sidebar() {
       <Link to={"/task"} style={{ textDecoration: "none", color: "#fff" }}>
         <div className="sidebar-position">
           <BsFillArchiveFill className="icon" />
-          <span>Task</span>
+          <span>My Task</span>
+        </div>
+      </Link>
+
+      <Link to={"/ViewTask"} style={{ textDecoration: "none", color: "#fff" }}>
+        <div className="sidebar-position">
+          <BsFillArchiveFill className="icon" />
+          <span>View Task</span>
         </div>
       </Link>
 
@@ -117,11 +119,6 @@ function Sidebar() {
           <span>Team</span>
         </div>
       </Link>
-
-      <div className="sidebar-position">
-        <BsFillGearFill className="icon" />
-        <span>Setting</span>
-      </div>
     </div>
   );
 }

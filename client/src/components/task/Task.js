@@ -1,6 +1,6 @@
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import axios from "axios";
+
 
 
 const Task = () => {
@@ -39,7 +39,7 @@ const Task = () => {
 
   const handleToDone = async (task_no) => {
     try {
-      const apiUrl = `http://localhost:5000/assignments/${task_no}/complete`;
+      const apiUrl = `http://localhost:5000/assignments/${task_no}/completed`;
       const response = await fetch(apiUrl, {
         method: "PATCH",
         headers: {
@@ -66,7 +66,7 @@ const Task = () => {
    
     <div className='main-container'>
    
-   <h4 className="mb-3">Task List</h4>
+   <h4 className="mb-3">My Task List</h4>
 
       <table className="table table-striped">
         <thead style={{ fontSize: "15px" }}>

@@ -10,6 +10,7 @@ import Team from "./components/Team/Team";
 import Home from "./components/home/Home";
 import Assignment from "./components/assignment/Add_Assignment/Assignment";
 import Task from "./components/task/Task";
+import ViewTask from "./components/view_task/ViewTask";
 
 
 
@@ -43,6 +44,7 @@ function App() {
 
             <Route path="/assignment" element={<Assignment />} />
             <Route path="/task" element={<Task />} />
+            <Route path="/ViewTask" element={<ViewTask/>} />
             <Route path="/team" element={<Team />} />
  
           </Routes>
