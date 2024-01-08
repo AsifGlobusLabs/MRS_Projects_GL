@@ -220,7 +220,7 @@ exports.getAssignmentStatus = async (req, res) => {
       employee_id = req.user.employee_id;
       const status = await Assignment.find({
         employee_id: employee_id,
-        status: "Complete",
+        status: "Completed",
       });
       res.send(status);
     }catch (error) {
