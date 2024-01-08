@@ -16,6 +16,7 @@ exports.createAssignment = async (req, res) => {
 
 
 // getting all assignment 
+
 exports.getAllAssignments = async (req, res) => {
   try {
     if (req.user.role === "admin") {
@@ -32,6 +33,7 @@ exports.getAllAssignments = async (req, res) => {
     res.status(500).send(error);
   }
 };
+
 
 // getting all assignment codes
 
@@ -120,37 +122,8 @@ exports.getAssignmentDetailsById = async (req, res) => {
 }
 
 
-// updating assignment 
-
-
-
-//geeting assignment by _id
-exports.getAssignmentDetailsById = async (req, res) => {
-  try {
-    const _id = req.params._id;
-    
-    console.log("Requested Assignment ID:", _id); // Log the requested ID for debugging
-    
-    const assignmentDetails = await Assignment.findOne({
-      _id: _id,
-    });
-
-    if (!assignmentDetails) {
-      console.log("Assignment not found"); // Log for debugging
-      return res.status(404).send();
-    } else {
-      res.send(assignmentDetails);
-    }
-  } catch (e) {
-    console.error("Error:", e); // Log the error for debugging
-    res.status(500).send(e);
-  }
-};
-
-
-
-
 //update Assignment
+
 exports.updateAssignment = async (req, res) => {
   try {
     const _id = req.params.id;
@@ -222,7 +195,6 @@ exports.completeAssignmentStatus = async (req, res) => {
 
     assignment.status = "Completed"; 
     await assignment.save();
-
     res.status(200).json(assignment);
   } catch (error) {
     console.error(error);
