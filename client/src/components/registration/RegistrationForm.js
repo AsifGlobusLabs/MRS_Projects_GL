@@ -104,11 +104,14 @@ const RegistrationForm = () => {
 
       // Assuming your API returns JSON, you can parse it like this
       const data = await response.json();
-
+  
       // Update state with the API response
       setResponse(data);
+    
+      
     } catch (error) {
       console.error('Error submitting form:', error);
+      alert("registration failed")
     } finally {
       // Set loading state back to false, whether the request was successful or not
       setIsLoading(false);
@@ -124,7 +127,7 @@ const RegistrationForm = () => {
       setPassword('');
       setConfirm_password('');
      
-      alert("registered successfully")
+      
     }
   };
 
@@ -141,7 +144,7 @@ const RegistrationForm = () => {
  
   return (
     <div className="main-container p-0">
-      <div className="register-header p-2" style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
+      <div className="register-header p-2" style={{display:"flex", justifyContent:"space-between", alignItems:"center",height: "12vh",}}>
       <h3 style={{marginLeft:"20px", background:"white", color:"#9e9ea4", padding:"6px"}}>
             Globus
             <span
@@ -179,18 +182,21 @@ const RegistrationForm = () => {
    </div>
       
       <div className="register-container">
-      <h4 style={{textAlign:"center", color:"#9e9ea4", margin:"0px", paddingTop:"5px", textDecoration:"underline #9e9ea4"}}>Registration Form</h4>
+        <div className="register-section">
+      <h4>SIGN-UP</h4>
       <div className="register">
       
         <div className="right-register">
-        <div className="right-img"></div>
+        <div className="right-img">
+     
+        </div>
         </div>
 
         {/* ----------------form----------------- */}
         <div className="left-register">
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
             <Row className="mb-3">
-              <Form.Group as={Col} md="4">
+              <Form.Group as={Col} md="6">
                 <Form.Label>First name</Form.Label>
                 <Form.Control
                   required
@@ -200,7 +206,7 @@ const RegistrationForm = () => {
                 />
                 <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
               </Form.Group>
-              <Form.Group as={Col} md="4">
+              <Form.Group as={Col} md="6">
                 <Form.Label>Last name</Form.Label>
                 <Form.Control
                   required
@@ -214,7 +220,7 @@ const RegistrationForm = () => {
             </Row>
 
             <Row className="mb-3">
-              <Form.Group as={Col} md="4">
+              <Form.Group as={Col} md="6">
                 <Form.Label>Position</Form.Label>
                 <Form.Select aria-label="Default select example" value={position} onChange={(e) => setPosition(e.target.value)}>
                   <option>select Position</option>
@@ -225,7 +231,7 @@ const RegistrationForm = () => {
                 </Form.Select>
               </Form.Group>
 
-              <Form.Group as={Col} md="4" >
+              <Form.Group as={Col} md="6" >
                 <Form.Label>Employee ID</Form.Label>
                 <InputGroup hasValidation>
                   <Form.Control
@@ -245,14 +251,14 @@ const RegistrationForm = () => {
             </Row>
 
             <Row className="mb-3">
-              <Form.Group as={Col} md="4">
+              <Form.Group as={Col} md="6">
                 <Form.Label>Email</Form.Label>
                 <Form.Control required type="email" placeholder="Enter Email" value={email} onChange={(e) => setEmail(e.target.value)}/>
                 <Form.Control.Feedback>
                   Please Enter Email
                 </Form.Control.Feedback>
               </Form.Group>
-              <Form.Group as={Col} md="4">
+              <Form.Group as={Col} md="6">
                 <Form.Label>Phone Number</Form.Label>
                 <Form.Control
                   required
@@ -275,14 +281,14 @@ const RegistrationForm = () => {
                   Please provide a Address.
                 </Form.Control.Feedback>
               </Form.Group>
-              <Form.Group as={Col} md="2">
+              <Form.Group as={Col} md="4">
                 <Form.Label>City</Form.Label>
                 <Form.Control type="text" placeholder="City" required value={city} onChange={(e) => setCity(e.target.value)}/>
                 <Form.Control.Feedback type="invalid">
                   Please provide a valid City.
                 </Form.Control.Feedback>
               </Form.Group>
-              <Form.Group as={Col} md="2" >
+              <Form.Group as={Col} md="4" >
                 <Form.Label>State</Form.Label>
                 <Form.Control type="text" placeholder="State" required value={state} onChange={(e) => setState(e.target.value)}/>
                 <Form.Control.Feedback type="invalid">
@@ -292,7 +298,7 @@ const RegistrationForm = () => {
             </Row>
 
             <Row className="mb-3">
-              <Form.Group as={Col} md="4" >
+              <Form.Group as={Col} md="6" >
                 <Form.Label htmlFor="inputPassword5">Password</Form.Label>
                 <Form.Control
                   type="password"
@@ -304,7 +310,7 @@ const RegistrationForm = () => {
                 
               </Form.Group>
 
-              <Form.Group as={Col} md="4" >
+              <Form.Group as={Col} md="6" >
                 <Form.Label htmlFor="inputPassword6">Confirm Password</Form.Label>
                 <Form.Control
                   type="password"
@@ -323,18 +329,22 @@ const RegistrationForm = () => {
              <input type="file" id="myFile" name="myFile"/>
             </Form.Group>
             </Row> */}
+            <div style={{display:"flex", justifyContent:"space-between", alignItems:"center"}}>
         <input type="file" id="myFile" name="filename" accept="image/*" onChange={(e)=>{setFile(e.target.files(0))}}/>
  
 
             <Button
+              style={{width:"25%", backgroundColor:"#1B4242", border:"none"}}
                 type="submit"
                 className="btn btn-primary mt-2"
                 disabled={isLoading}
               >
                 {isLoading ? "Submitting..." : "Submit"}
               </Button>
+              </div>
           </Form>
         </div>
+      </div>
       </div>
       </div>
     </div>

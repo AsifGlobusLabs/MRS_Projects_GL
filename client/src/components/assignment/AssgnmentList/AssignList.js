@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import moment from "moment";
 import { useNavigate } from "react-router-dom";
+import EditAssignmentModal from "./EditAssignmentModal";
 
 const AssignList = () => {
   const navigate = useNavigate();
@@ -10,6 +11,11 @@ const AssignList = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage] = useState(50);
+  // const [modalShow, setModalShow] = useState(false);
+  // const [selectedUserData, setSelectedUserData] = useState(null);
+
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [selectedItemId, setSelectedItemId] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -60,28 +66,16 @@ const AssignList = () => {
     }
   };
 
-  // -----------filter data-------
+  // edit assignment List
+  const handleEditTask = (_id) => {
+    // Your delete logic...
 
-  // const filterData = async (employee_id) => {
-  //   try {
-  //     const apiUrl = `http://localhost:5000/assignments/${employee_id}`;
-  //     const response = await fetch(apiUrl);
-  //     const result = await response.json();
-  //     // console.log( result, "test2")
-  //     if (Array.isArray(result)) {
-  //       setFilteredData(result);
-  //       // console.log( result, "test1")
-  //     } else {
-  //       setFilteredData([result]);
-  //       // console.log( result, "test3")
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching filtered data:", error);
-  //   }
-  // };
+    // Show the edit modal when delete is clicked
 
+    setShowEditModal(true);
+    setSelectedItemId(_id);
+  };
 
-  // ------------add to task-----------
   const handleAddToTask = async (task_no) => {
     try {
       const apiUrl = `http://localhost:5000/assignments/${task_no}/progress`;
@@ -97,7 +91,7 @@ const AssignList = () => {
 
       if (response.ok) {
         // Handle success, maybe update the UI or perform additional actions
-        console.log("Task added successfully");
+
         alert("Data Add to Task");
         navigate("/task");
       } else {
@@ -115,63 +109,9 @@ const AssignList = () => {
 
   // Change page
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  
-
-  // const renderAddIcon = (item) => {
-  //   if (item.status === "pending") {
-  //     console.log(item,"status");
-  //     if ( item.role === "user"){
-  //       console.log(item.role, "user");
-  //     return (
-  //       <i
-  //         className="fa-solid fa-square-plus"
-  //         style={{
-  //           cursor: "pointer",
-  //           color: "#0084ff",
-  //           fontSize: "20px",
-  //         }}
-  //         onClick={() => handleAddToTask(item.code)}
-  //       ></i>
-  //     )} else {
-  //       return(
-  //         <i
-  //         className="fa-solid fa-hourglass-half"
-  //         style={{
-  //           color: "orange",
-  //           fontSize: "20px",
-  //         }}
-  //       ></i>
-  //       )
-  //      }
-  //   } 
-
-  //  else if (item.status === "progress") {
-  //     return (
-  //       <i
-  //         className="fa-solid fa-spinner"
-  //         style={{
-  //           color: "orange",
-  //           fontSize: "20px",
-  //         }}
-  //       ></i>
-  //     );
-  //   } else {
-  //     return (
-  //       <i
-  //         className="fa-solid fa-circle-check"
-  //         style={{
-  //           color: "green",
-  //           fontSize: "20px",
-  //         }}
-  //       ></i>
-  //     );
-  //   }
-  // };
-
 
   return (
     <div>
- 
       <table className="table table-striped">
         <thead style={{ fontSize: "15px" }}>
           <tr>
@@ -211,16 +151,20 @@ const AssignList = () => {
                 )}
               </td>
 
+              {/* --------edit-------- */}
               <td style={{ textAlign: "center" }}>
                 <i
+                  // onClick={() => handleEdit()}
                   className="fa-solid fa-pen-to-square"
                   style={{
                     cursor: "pointer",
                     color: "#045e83",
                     fontSize: "16px",
                   }}
+                  onClick={() => handleEditTask(item._id)}
                 ></i>
               </td>
+
               <td style={{ textAlign: "center" }}>
                 <i
                   className="fa-solid fa-trash-can"
@@ -259,12 +203,19 @@ const AssignList = () => {
                 )}
               </td>
 
-
               {/* <td style={{ textAlign: "center" }}> {renderAddIcon(item)}</td> */}
             </tr>
           ))}
         </tbody>
       </table>
+
+      {/* Edit Assignment Modal */}
+      <EditAssignmentModal
+        show={showEditModal}
+        onClose={() => setShowEditModal(false)}
+        itemId={selectedItemId}
+      />
+
       {/* Pagination */}
       <ul className="pagination">
         {Array.from(

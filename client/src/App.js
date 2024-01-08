@@ -8,7 +8,7 @@ import "./App.css";
 import AuthenticationRoutes from "./components/routes/AuthenticationRoutes";
 import Team from "./components/Team/Team";
 import Home from "./components/home/Home";
-import Assignment from "./components/assignment/Assignment";
+import Assignment from "./components/assignment/Add_Assignment/Assignment";
 import Task from "./components/task/Task";
 
 

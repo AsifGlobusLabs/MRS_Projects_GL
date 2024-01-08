@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Button, Container, Modal } from "react-bootstrap";
-import AssignList from "./AssignList";
+import AssignList from "../AssgnmentList/AssignList"
 
 const AssignmentModal = ({ show, onHide }) => {
   const [employee_id, setemployee_id] = useState([]);
@@ -69,7 +69,7 @@ const AssignmentModal = ({ show, onHide }) => {
           "http://localhost:5000/assignments/latest-assignment-code",
         );
         const newCodeNumber = incrementCodeNumber(latestCodeNumber);
-        console.log(newCodeNumber);
+        
         setFormData((prevData) => ({ ...prevData, task_no: newCodeNumber, task_given_by: userData.first_name, }));
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -78,6 +78,7 @@ const AssignmentModal = ({ show, onHide }) => {
 
     fetchData();
   }, []);
+
 
   const fetchLatestCodeNumber = async (apiUrl) => {
     try {
@@ -140,7 +141,7 @@ const AssignmentModal = ({ show, onHide }) => {
   };
 
   const userData = JSON.parse(sessionStorage.getItem("userData"));
-  console.log(userData, "hello");
+ 
 
 
   return (
@@ -215,12 +216,10 @@ const AssignmentModal = ({ show, onHide }) => {
                     onChange={handleInputChange}
                   />
              </div>
-
                 <div className="mb-3 col">
                   <label htmlFor="employee_id" className="form-label">
                     Assign To:
                   </label>
-                 
                   <select
                     className="form-select"
                     aria-label="Default select example"
