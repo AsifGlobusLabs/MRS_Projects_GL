@@ -158,7 +158,6 @@ exports.progressAssignmentStatus = async (req, res) => {
   const task_no = req.params.task_no;
 
   try {
-    console.log(req.user.role);
     if(req.user.role === "user"){
     const assignment = await Assignment.findOne({ task_no: task_no });
 
@@ -207,18 +206,13 @@ exports.completeAssignmentStatus = async (req, res) => {
 
 exports.getAssignmentStatus = async (req, res) => {
   try {
-    if (req.user.role === "admin") {
-      const status = await Assignment.find({ status: "Progress" });
-      res.send(status);
-    } else {
       employee_id = req.user.employee_id;
       const status = await Assignment.find({
         employee_id: employee_id,
         status: "Progress",
       });
       res.send(status);
-    }
-  } catch (error) {
+    }catch (error) {
     res.status(500).json({ message: error.message });
   }
 };
