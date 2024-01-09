@@ -62,12 +62,14 @@ const Task = () => {
     window.location.reload(false);
   };
 
+  const userData = JSON.parse(sessionStorage.getItem("userData"));
+
   return (
    
     <div className='main-container'>
-   
+  
    <h4 className="mb-3">My Task List</h4>
-
+   {userData.role==="user" ? (
       <table className="table table-striped">
         <thead style={{ fontSize: "15px" }}>
           <tr>
@@ -120,6 +122,7 @@ const Task = () => {
           ))}
         </tbody>
       </table>
+      ):(<></>)}
     </div>
   
   )

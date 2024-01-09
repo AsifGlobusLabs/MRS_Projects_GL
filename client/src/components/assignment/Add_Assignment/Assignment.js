@@ -285,6 +285,9 @@ const AssignmentModal = ({ show, onHide }) => {
 const Assignment = () => {
   const [modalShow, setModalShow] = useState(false);
 
+
+  const userData = JSON.parse(sessionStorage.getItem("userData"));
+
   return (
     <div className="main-container">
       <div
@@ -299,7 +302,7 @@ const Assignment = () => {
         <h4 className="mb-3" style={{ color: "#1B4242" }}>
           Assignment List
         </h4>
-
+   {userData.role==="admin" ? (
         <Button
           variant="primary"
           onClick={() => setModalShow(true)}
@@ -314,6 +317,7 @@ const Assignment = () => {
         >
           Create Assignment
         </Button>
+        ):(<> </>)}
         <AssignmentModal show={modalShow} onHide={() => setModalShow(false)} />
       </div>
       <div className="container mt-3">

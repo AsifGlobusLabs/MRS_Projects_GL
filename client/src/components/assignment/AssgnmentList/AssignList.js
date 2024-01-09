@@ -45,35 +45,41 @@ const AssignList = () => {
     fetchData();
   }, []);
 
+
+  
+
   // ------------delete btn------------
-// delete btn
-const handleDelete = async (_id) => {
-  // Display a confirmation dialog
-  const confirmDelete = window.confirm("Are you sure you want to delete this item?");
+  // delete btn
+  const handleDelete = async (_id) => {
+    // Display a confirmation dialog
+    const confirmDelete = window.confirm(
+      "Are you sure you want to delete this item?",
+    );
 
-  if (!confirmDelete) {
-    // If the user clicks "Cancel" in the confirmation dialog, do nothing
-    return;
-  }
-
-  try {
-    const apiUrl = `http://localhost:5000/assignments/${_id}`;
-    const response = await fetch(apiUrl, {
-      method: "DELETE",
-    });
-
-    if (response.ok) {
-      // Remove the deleted item from both data and filteredData arrays
-      setData((prevData) => prevData.filter((item) => item._id !== _id));
-      setFilteredData((prevData) => prevData.filter((item) => item._id !== _id));
-    } else {
-      console.error("Error deleting item:", response.status);
+    if (!confirmDelete) {
+      // If the user clicks "Cancel" in the confirmation dialog, do nothing
+      return;
     }
-  } catch (error) {
-    console.error("Error deleting item:", error);
-  }
-};
 
+    try {
+      const apiUrl = `http://localhost:5000/assignments/${_id}`;
+      const response = await fetch(apiUrl, {
+        method: "DELETE",
+      });
+
+      if (response.ok) {
+        // Remove the deleted item from both data and filteredData arrays
+        setData((prevData) => prevData.filter((item) => item._id !== _id));
+        setFilteredData((prevData) =>
+          prevData.filter((item) => item._id !== _id),
+        );
+      } else {
+        console.error("Error deleting item:", response.status);
+      }
+    } catch (error) {
+      console.error("Error deleting item:", error);
+    }
+  };
 
   // edit assignment List
   const handleEditTask = (_id) => {
@@ -134,9 +140,9 @@ const handleDelete = async (_id) => {
             <th>Assign Date</th>
             <th>Deadline Date</th>
             <th>Status</th>
-            <th>Edit</th>
-            <th>Delete</th>
-            <th>Add</th>
+            {userData.role === "admin" ? <th>Edit</th> : <></>}
+            {userData.role === "admin" ? <th>Delete</th> : <></>}
+            {userData.role === "admin" ? <></> : <th>Add</th>}
           </tr>
         </thead>
 
@@ -163,66 +169,75 @@ const handleDelete = async (_id) => {
               </td>
 
               {/* --------edit-------- */}
-              <td style={{ textAlign: "center" }}>
-                {userData.role==="admin" ? (
-                  <i
-                  // onClick={() => handleEdit()}
-                  className="fa-solid fa-pen-to-square"
-                  style={{
-                    cursor: "pointer",
-                    color: "#045e83",
-                    fontSize: "16px",
-                  }}
-                  onClick={() => handleEditTask(item._id)}
-                ></i>
-                ):(
-                  <i class="fa-solid fa-square-xmark" style={{
-                    color: "#045e83",
-                    fontSize: "17px",
-                  }}></i>
-                )}
-                
-              </td>
 
-              <td style={{ textAlign: "center" }}>
-                <i
-                  className="fa-solid fa-trash-can"
-                  style={{ cursor: "pointer", color: "red", fontSize: "16px" }}
-                  onClick={() => handleDelete(item._id)}
-                ></i>
-              </td>
-
-              <td style={{ textAlign: "center" }}>
-                {item.status === "Pending" ? (
+              {userData.role === "admin" ? (
+                <td style={{ textAlign: "center" }}>
                   <i
-                    className="fa-solid fa-square-plus"
+                    // onClick={() => handleEdit()}
+                    className="fa-solid fa-pen-to-square"
                     style={{
                       cursor: "pointer",
-                      color: "#0084ff",
-                      fontSize: "20px",
+                      color: "#045e83",
+                      fontSize: "16px",
                     }}
-                    onClick={() => handleAddToTask(item.task_no)}
+                    onClick={() => handleEditTask(item._id)}
                   ></i>
-                ) : item.status === "Progress" ? (
-                  <i
-                    className="fa-solid fa-spinner"
-                    style={{
-                      color: "orange",
-                      fontSize: "20px",
-                    }}
-                  ></i>
-                ) : (
-                  <i
-                    className="fa-solid fa-circle-check"
-                    style={{
-                      color: "green",
-                      fontSize: "20px",
-                    }}
-                  ></i>
-                )}
-              </td>
+                </td>
+              ) : (
+                <></>
+              )}
 
-              {/* <td style={{ textAlign: "center" }}> {renderAddIcon(item)}</td> */}
+              {/* ----delete---   */}
+              {userData.role === "admin" ? (
+                <td style={{ textAlign: "center" }}>
+                  <i
+                    className="fa-solid fa-trash-can"
+                    style={{
+                      cursor: "pointer",
+                      color: "red",
+                      fontSize: "16px",
+                    }}
+                    onClick={() => handleDelete(item._id)}
+                  ></i>
+                </td>
+              ) : (
+                <> </>
+              )}
+
+              {userData.role === "user" ? (
+                <td style={{ textAlign: "center" }}>
+                  {item.status === "Pending" ? (
+                    <i
+                      className="fa-solid fa-square-plus"
+                      style={{
+                        cursor: "pointer",
+                        color: "#0084ff",
+                        fontSize: "20px",
+                      }}
+                      onClick={() => handleAddToTask(item.task_no)}
+                    ></i>
+                  ) : item.status === "Progress" ? (
+                    <i
+                      className="fa-solid fa-spinner"
+                      style={{
+                        color: "orange",
+                        fontSize: "20px",
+                      }}
+                    ></i>
+                  ) : (
+                    <i
+                      className="fa-solid fa-circle-check"
+                      style={{
+                        color: "green",
+                        fontSize: "20px",
+                      }}
+                    ></i>
+                  )}
+                </td>
+              ) : (
+                <></>
+              )}
+              
             </tr>
           ))}
         </tbody>

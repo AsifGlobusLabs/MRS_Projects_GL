@@ -7,6 +7,7 @@ const ViewTask = () => {
   const [data, setData] = useState([]);
 
 
+  const userData = JSON.parse(sessionStorage.getItem("userData"));
 
   useEffect(() => {
     const fetchData = async () => {
@@ -44,7 +45,7 @@ const ViewTask = () => {
     <div className='main-container'>
    
    <h4 className="mb-3">View Task List</h4>
-
+   {userData.role==="user" ? (
       <table className="table table-striped">
         <thead style={{ fontSize: "15px" }}>
           <tr>
@@ -76,6 +77,7 @@ const ViewTask = () => {
           ))}
         </tbody>
       </table>
+        ):(<></>)}
     </div>
   
   )
