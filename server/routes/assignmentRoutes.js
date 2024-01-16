@@ -8,7 +8,6 @@ router.post('/', assignmentController.createAssignment);
 router.get('/',auth, assignmentController.getAllAssignments);
 router.get('/latest-assignment-code', assignmentController.getLatestAssignmentCode);
 router.get('/:id', assignmentController.getAssignmentDetailsById);
-// router.get('/assignment-codes', assignmentController.getAssignmentCodes);
 router.get('/latest-assignment-employeeid', assignmentController.getLatestAssignmentByEmployeeId);
 router.get('/:employee_id', assignmentController.getAssignmentDetailsByEmployeeId);
 router.patch('/:id', assignmentController.updateAssignment);
@@ -17,7 +16,5 @@ router.get('/status/progress',auth, assignmentController.getProgressStatusAssign
 router.get('/status/completed',auth, assignmentController.getCompletedStatusAssignment);
 router.patch('/:task_no/progress',auth, assignmentController.progressAssignmentStatus);
 router.patch('/:task_no/completed', assignmentController.completeAssignmentStatus);
-// router.get('/status', assignmentController.getAssignmentStatus);
-
 
 module.exports = router;
