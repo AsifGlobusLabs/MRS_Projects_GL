@@ -113,7 +113,7 @@ const LoginForm = () => {
         
         <div className="login-section">
         <div>
-          <h3>SIGN-IN</h3>
+          <h4>SIGN-IN</h4>
         </div>
         <div className="login-section1">
           <div className="login-left">

@@ -1,6 +1,6 @@
 import moment from 'moment';
 import React, { useEffect, useState } from 'react';
-import axios from "axios";
+
 
 
 const Task = () => {
@@ -39,7 +39,7 @@ const Task = () => {
 
   const handleToDone = async (task_no) => {
     try {
-      const apiUrl = `http://localhost:5000/assignments/${task_no}/complete`;
+      const apiUrl = `http://localhost:5000/assignments/${task_no}/completed`;
       const response = await fetch(apiUrl, {
         method: "PATCH",
         headers: {
@@ -62,12 +62,14 @@ const Task = () => {
     window.location.reload(false);
   };
 
+  const userData = JSON.parse(sessionStorage.getItem("userData"));
+
   return (
    
     <div className='main-container'>
-   
-   <h4 className="mb-3">Task List</h4>
-
+  
+   <h4 className="mb-3">My Task List</h4>
+   {userData.role==="user" ? (
       <table className="table table-striped">
         <thead style={{ fontSize: "15px" }}>
           <tr>
@@ -120,6 +122,7 @@ const Task = () => {
           ))}
         </tbody>
       </table>
+      ):(<></>)}
     </div>
   
   )

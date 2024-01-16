@@ -213,9 +213,9 @@ align-items: center;
   box-shadow: 2px 2px 17px rgba(128, 128, 128, 0.575);
 }
 
-.login-section h3{
+.login-section h4{
   text-align: center;
-  color: white;
+  color: #1B4242;
   padding: 10px;
 }
 
@@ -452,4 +452,18 @@ width: 100%;
   overflow: auto; /* or auto, scroll, etc. based on your requirements */
   white-space: nowrap; 
   /* text-overflow:ellipsis; */
+}
+
+
+
+.table tr th{
+  background-color: rgba(158, 158, 158, 0.753);
+  height: 30px;
+  padding: 10px;
+}
+
+.table td{
+  /* background-color: rgba(230, 255, 214, 0.842); */
+  padding:13px  10px;
+  font-size: 14px;
 }

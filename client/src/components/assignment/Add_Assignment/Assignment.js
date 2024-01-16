@@ -69,7 +69,7 @@ const AssignmentModal = ({ show, onHide }) => {
           "http://localhost:5000/assignments/latest-assignment-code",
         );
         const newCodeNumber = incrementCodeNumber(latestCodeNumber);
-        
+        console.log(newCodeNumber, "task");
         setFormData((prevData) => ({ ...prevData, task_no: newCodeNumber, task_given_by: userData.first_name, }));
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -84,7 +84,9 @@ const AssignmentModal = ({ show, onHide }) => {
     try {
       const response = await fetch(apiUrl);
       const data = await response.json();
+ 
       return data.task_no;
+   
     } catch (error) {
       console.error("Error fetching latest code number:", error);
       throw error;
@@ -94,6 +96,7 @@ const AssignmentModal = ({ show, onHide }) => {
   const incrementCodeNumber = (currentCodeNumber) => {
     const currentCode = parseInt(currentCodeNumber.slice(1), 10);
     const newCode = currentCode + 1;
+    console.log(newCode, "task2")
     return `T${newCode.toString().padStart(3, "0")}`;
   };
 
@@ -282,6 +285,9 @@ const AssignmentModal = ({ show, onHide }) => {
 const Assignment = () => {
   const [modalShow, setModalShow] = useState(false);
 
+
+  const userData = JSON.parse(sessionStorage.getItem("userData"));
+
   return (
     <div className="main-container">
       <div
@@ -296,7 +302,7 @@ const Assignment = () => {
         <h4 className="mb-3" style={{ color: "#1B4242" }}>
           Assignment List
         </h4>
-
+   {userData.role==="admin" ? (
         <Button
           variant="primary"
           onClick={() => setModalShow(true)}
@@ -311,6 +317,7 @@ const Assignment = () => {
         >
           Create Assignment
         </Button>
+        ):(<> </>)}
         <AssignmentModal show={modalShow} onHide={() => setModalShow(false)} />
       </div>
       <div className="container mt-3">
